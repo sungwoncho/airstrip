@@ -1,0 +1,17 @@
+<template name="feed">
+  <article class='feed-item'>
+    <figure class='source-badge'>
+      <img src="{{sourceBadgeUrl}}" alt="{{source}}">
+    </figure>
+
+    <div class="item-info">
+      <h2>
+        <a href="{{source}}">{{title}}</a>
+      </h2>
+
+      <span class="secondary-info">
+        {{author}} | {{source}}
+      </span>
+    </div>
+  </article>
+</template>

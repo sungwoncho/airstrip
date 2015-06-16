@@ -1,0 +1,31 @@
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
+.feed-list {
+  padding: 3em 0;
+}
+
+.feed-item {
+  padding: 1em;
+  @include outer-container;
+}
+
+.source-badge {
+  @include span-columns(2 of 12);
+
+  img {
+    width: 50px;
+  }
+}
+
+.item-info {
+  @include span-columns(10 of 12);
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.secondary-info {
+  color: #2C3E50;
+}
