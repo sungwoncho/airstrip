@@ -3,5 +3,8 @@ Router.configure({
 });
 
 Router.route('/', {
-  name: 'feeds'
+  name: 'feeds',
+  waitOn: function () {
+    return [Meteor.subscribe('feeds')];
+  }
 });
