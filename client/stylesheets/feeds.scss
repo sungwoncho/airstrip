@@ -1,6 +1,8 @@
 @import 'bourbon/bourbon';
 @import 'neat/neat';
 
+$mobile: new-breakpoint(max-width 480px 4);
+
 .feed-list {
   padding: 3em 0;
 }
@@ -13,6 +15,10 @@
 .source-badge {
   @include span-columns(2 of 12);
 
+  @include media($mobile) {
+    @include span-columns(1 of 4);
+  }
+
   img {
     width: 50px;
   }
@@ -20,6 +26,10 @@
 
 .item-info {
   @include span-columns(10 of 12);
+
+  @include media($mobile) {
+    @include span-columns(3 of 4);
+  }
 
   h2 {
     margin-top: 0;
