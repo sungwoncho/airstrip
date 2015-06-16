@@ -1,8 +1,3 @@
-@import 'bourbon/bourbon';
-@import 'neat/neat';
-
-$mobile: new-breakpoint(max-width 480px 4);
-
 .feed-list {
   padding: 3em 0;
 }
