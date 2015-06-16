@@ -7,5 +7,12 @@ Template.feed.helpers({
     } else if (this.source === 'blog') {
       return 'images/blog-badge.png'
     }
+  },
+
+  hostUrl: function () {
+    var fullUrl = document.createElement('a');
+    fullUrl.href = this.url;
+
+    return fullUrl.hostname
   }
 });
