@@ -1,0 +1,11 @@
+<template name="dates">
+  <section class="feed-list">
+    {{# each dates}}
+      {{formatDate date}}
+
+      {{> feeds}}
+
+      <hr>
+    {{/each}}
+  </section>
+</template>

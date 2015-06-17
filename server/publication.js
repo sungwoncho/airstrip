@@ -1,3 +1,3 @@
-Meteor.publish('feeds', function () {
-  return Feeds.find();
-})
+Meteor.publish('dates', function () {
+  return Dates.find();
+});
