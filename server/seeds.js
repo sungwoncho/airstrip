@@ -1,59 +1,59 @@
 Meteor.startup(function () {
-  if (Dates.find().count() == 0) {
+  if (Dates.find().count() === 0) {
     [
       {
-        date: new Date(2015, 5, 1),
+        date: moment('2015-05-01').format('MMMM D, YYYY'),
         feeds: [
           {
             title: 'Just arrived here in Chicago',
-            source: 'reddit',
+            source: 'www.reddit.com',
             url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel/',
             author: 'yayman91'
           },
           {
             title: 'How I got into trouble in Providence',
-            source: 'blog',
-            url: 'https://some.blog.com',
+            source: 'some.blog.com',
+            url: 'https://some.blog.com/post/123',
             author: 'pdfrules'
           },
           {
             title: 'What should I do with old iPhone?',
-            source: 'nomadforum',
+            source: 'www.nomadforum.io',
             url: 'https://nomadforum.io/t/digital-nomad-101-how-to-become-a-digital-nomad/465',
             author: 'jane005'
           },
           {
             title: 'Learn how this guy is doing it',
-            source: 'nomadstory',
+            source: 'www.nomadlist.com',
             url: 'https://nomadlist.com/stories/iwantmyname-works-remotely?utm_content=buffer6e883&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer',
             author: 'Jake Ellenburger'
           }
         ]
       },
       {
-        date: new Date(2015, 5, 2),
+        date: moment('2015-05-02').format('MMMM D, YYYY'),
         feeds: [
           {
             title: 'What up guys',
-            source: 'reddit',
+            source: 'www.reddit.com',
             url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel',
             author: 'drake001'
           },
           {
             title: 'Any meetup here?',
-            source: 'nomadforum',
+            source: 'www.nomadforum.io',
             url: '#',
             author: 'thenewguy'
           },
           {
             title: 'Should I get a mac?',
-            source: 'nomadforum',
+            source: 'www.nomadforum.io',
             url: 'https://nomadforum.io/t/digital',
             author: 'jane005'
           },
           {
             title: 'US citizen visa required?',
-            source: 'reddit',
+            source: 'www.reddit.com',
             url: 'http://www.nytimes.com/2015/06/14/fashion/a-curious-midlife-crisis-for-a-tech-entrepreneur.html?emc=eta1',
             author: 'Jake Ellenburger'
           }

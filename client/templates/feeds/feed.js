@@ -1,10 +1,10 @@
 Template.feed.helpers({
   sourceBadgeUrl: function () {
-    if (this.source === 'nomadstory' || this.source === 'nomadforum') {
+    if (this.source === 'www.nomadlist.com' || this.source === 'www.nomadforum.io') {
       return 'images/nomadlist-badge.png';
-    } else if (this.source === 'reddit') {
+    } else if (this.source === 'www.reddit.com') {
       return 'images/reddit-badge.png';
-    } else if (this.source === 'blog') {
+    } else {
       return 'images/blog-badge.png';
     }
   },
