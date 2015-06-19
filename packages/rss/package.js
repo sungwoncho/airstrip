@@ -10,10 +10,17 @@ Npm.depends({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
+
+  api.use([
+    'http',
+    'percolatestudio:synced-cron'
+  ], 'server');
+
   api.addFiles([
     'server/cron.js',
-    'server/fetch_feeds.js'
-  ], ['server']);
+    'server/fetch_feeds.js',
+    'server/lib/start.js'
+  ], 'server');
 });
 
 Package.onTest(function(api) {

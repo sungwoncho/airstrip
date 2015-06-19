@@ -80,9 +80,3 @@ fetchFeeds = function () {
     feedHandler.call(rssContent);
   });
 };
-
-Meteor.methods({
-  fetchFeeds: function () {
-    fetchFeeds();
-  }
-});
