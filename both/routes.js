@@ -3,8 +3,8 @@ Router.configure({
 });
 
 Router.route('/', {
-  name: 'dates',
+  name: 'flights',
   waitOn: function () {
-    return [Meteor.subscribe('dates')];
+    return [Meteor.subscribe('flights')];
   }
 });

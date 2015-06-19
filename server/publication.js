@@ -1,3 +1,3 @@
-Meteor.publish('dates', function () {
-  return Dates.find();
+Meteor.publish('flights', function () {
+  return Flights.find();
 });

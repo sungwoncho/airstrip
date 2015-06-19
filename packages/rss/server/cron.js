@@ -4,6 +4,6 @@ SyncedCron.add({
     return parser.text('at 8:00 am');
   },
   job: function () {
-    fetchFeeds();
+    fetchItems();
   }
 });

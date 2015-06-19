@@ -1,4 +1,4 @@
-Template.feed.helpers({
+Template.item.helpers({
   sourceBadgeUrl: function () {
     if (this.source === 'nomadlist.com' || this.source === 'nomadforum.io') {
       return 'images/nomadlist-badge.png';

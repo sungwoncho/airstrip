@@ -1,9 +1,9 @@
 Meteor.startup(function () {
-  if (Dates.find().count() === 0) {
+  if (Flights.find().count() === 0) {
     [
       {
         date: moment('2015-05-01').format('MMMM D, YYYY'),
-        feeds: [
+        items: [
           {
             title: 'Just arrived here in Chicago',
             source: 'www.reddit.com',
@@ -32,7 +32,7 @@ Meteor.startup(function () {
       },
       {
         date: moment('2015-05-02').format('MMMM D, YYYY'),
-        feeds: [
+        items: [
           {
             title: 'What up guys',
             source: 'www.reddit.com',
@@ -60,7 +60,7 @@ Meteor.startup(function () {
         ]
       }
     ].forEach(function (feed) {
-      Dates.insert(feed);
+      Flights.insert(feed);
     });
   }
 });
