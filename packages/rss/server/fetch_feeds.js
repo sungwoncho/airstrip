@@ -1,9 +1,10 @@
 var FeedParser = Npm.require('feedparser');
-var Readable = Npm.require('stream').Readable;
 var Url = Npm.require('url');
+var Readable = Npm.require('stream').Readable;
 
 var feedUrls = [
-  'http://reddit.com/r/digitalnomad/hot.rss'
+  'http://reddit.com/r/digitalnomad/hot.rss',
+  'https://www.kimonolabs.com/api/rss/3f5jp576?apikey=9es3t0vNc6vORrj0s4C6skHz6m4tYfIN'
 ];
 
 var streamGetter = {
@@ -13,14 +14,6 @@ var streamGetter = {
 
     stream.push(content);
     return stream;
-  }
-};
-
-var feedValidator = {
-  isValid: function (feed) {
-    if (feed.title.length) {
-      return true;
-    }
   }
 };
 
@@ -52,17 +45,13 @@ var feedHandler = {
           title: item.title,
           url: item.link,
           guid: item.guid,
+          author: item.author,
           description: item.description,
           source: feedHandler.getSourceFromLink(item.link)
         };
 
         if (!!Dates.findOne({'feeds.guid': item.guid})) {
           console.log('Already exists.');
-          continue;
-        }
-
-        if (!feedValidator.isValid(newFeed)) {
-          console.log('Invalid feed');
           continue;
         }
 

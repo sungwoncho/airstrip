@@ -1,6 +1,6 @@
 Template.feed.helpers({
   sourceBadgeUrl: function () {
-    if (this.source === 'www.nomadlist.com' || this.source === 'www.nomadforum.io') {
+    if (this.source === 'nomadlist.com' || this.source === 'nomadforum.io') {
       return 'images/nomadlist-badge.png';
     } else if (this.source === 'www.reddit.com') {
       return 'images/reddit-badge.png';
