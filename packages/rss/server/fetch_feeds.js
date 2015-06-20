@@ -31,13 +31,13 @@ var feedHandler = {
     feedParser.on('readable', Meteor.bindEnvironment(function () {
       var stream = this,
           meta = this.meta,
-          today = moment().format('MMMM D, YYYY'),
+          today = moment().format('YYYYMMDD'),
           dateDoc = Flights.find({date: today}),
           item;
 
       // If date doc does not exist, make one.
       if (dateDoc.count() === 0) {
-        Flights.insert({date: today, feeds: []});
+        Flights.addFlight({date: today, feeds: []});
       }
 
       while(item = stream.read()) {
