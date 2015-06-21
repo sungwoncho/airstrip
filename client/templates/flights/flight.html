@@ -1,7 +1,27 @@
 <template name="flight">
-  Flight #{{number}}
+  <section class="item-list">
+    Flight #{{number}}
 
-  {{formatDate date}}
+    {{formatDate date}}
 
-  {{> items}}
+    {{> items}}
+  </section>
+
+
+  <aside class="recent-flights">
+    <ul>
+      {{#each recentFlights}}
+        <li>
+          {{formatDate date}}
+
+          <a href="{{pathFor route='flight.show'}}">
+            Flight #{{number}}
+          </a>
+        </li>
+      {{/each}}
+      <li>
+        <a href="{{pathFor route='flight.index'}}">More</a>
+      </li>
+    </ul>
+  </aside>
 </template>

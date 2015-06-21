@@ -1,19 +1,8 @@
 <template name="flights">
-  <section class="feed-list">
-    {{> flight mostRecentFlight}}
-  </section>
-
-  <aside class="recent-flight-list">
-    <ul>
-      {{#each recentFlights}}
-        <li>
-          {{formatDate date}}
-
-          <a href="/f/{{date}}">
-            Flight #{{number}}
-          </a>
-        </li>
-      {{/each}}
-    </ul>
-  </aside>
+  {{#each allFlights}}
+    <a href="{{pathFor route='flight.show'}}">
+      {{number}}
+      {{date}}
+    </a>
+  {{/each}}
 </template>
