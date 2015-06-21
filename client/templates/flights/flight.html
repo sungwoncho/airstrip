@@ -1,0 +1,45 @@
+<template name="flight">
+  <section class="flight-info">
+    <h2>
+      <a href="{{pathFor route='flight.show'}}">
+        Flight #{{number}}
+      </a>
+    </h2>
+
+    <time>
+      <i class="fa fa-plane"></i>
+      {{formatDate date}}
+    </time>
+  </section>
+
+  <section class="item-list">
+    {{> items}}
+  </section>
+
+
+  <aside class="recent-flights">
+    <h2>Recent Flights</h2>
+    <ul>
+      {{#each recentFlights}}
+        <li>
+          <h3>
+            <a href="{{pathFor route='flight.show'}}">
+              Flight #{{number}}
+            </a>
+          </h3>
+
+          <time>
+            <i class="fa fa-plane"></i>
+            {{formatDate date}}
+          </time>
+        </li>
+      {{/each}}
+    </ul>
+
+    <div class="action">
+      <a href="{{pathFor route='flight.index'}}" class='btn'>
+        View all flights
+      </a>
+    </div>
+  </aside>
+</template>

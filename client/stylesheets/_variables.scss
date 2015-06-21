@@ -1,1 +1,10 @@
 $mobile: new-breakpoint(max-width 480px 4);
+$tablet: new-breakpoint(max-width 1024px 12);
+
+$green: #3CC06F;
+$teal: #289976;
+$light-orange: #FFE877;
+$orange: #FF5600;
+$gray: #D7D7D7;
+
+$base-link-color: $light-orange;

@@ -1,11 +1,37 @@
 .main-header {
-  background-color: #2C3E50;
-  padding: 7.5em 0 9em;
+  background-color: $green;
+  padding: 4.5em 0 7em;
 
-  h1 {
+  .logo {
+    text-align: center;
+  }
+
+  figcaption {
+    text-align: center;
+    color: #fff;
+    letter-spacing: 5px;
+
+    .brand {
+      @include media($mobile) {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .intro {
     margin: 0;
     text-align: center;
     color: #fff;
     font-size: 3em;
+
+    @include media($mobile) {
+      font-size: 1.5em;
+    }
   }
+}
+
+footer {
+  padding: 2em 0;
+  text-align: center;
+  color: darken($gray, 20%);
 }

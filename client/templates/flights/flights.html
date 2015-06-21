@@ -1,0 +1,8 @@
+<template name="flights">
+  {{#each allFlights}}
+    <a href="{{pathFor route='flight.show'}}">
+      {{number}}
+      {{date}}
+    </a>
+  {{/each}}
+</template>

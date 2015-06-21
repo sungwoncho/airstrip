@@ -31,17 +31,17 @@ var feedHandler = {
     feedParser.on('readable', Meteor.bindEnvironment(function () {
       var stream = this,
           meta = this.meta,
-          today = moment().format('MMMM D, YYYY'),
-          dateDoc = Dates.find({date: today}),
+          today = moment().format('YYYYMMDD'),
+          dateDoc = Flights.find({date: today}),
           item;
 
       // If date doc does not exist, make one.
       if (dateDoc.count() === 0) {
-        Dates.insert({date: today, feeds: []});
+        Flights.addFlight({date: today, feeds: []});
       }
 
       while(item = stream.read()) {
-        var newFeed = {
+        var newItem = {
           title: item.title,
           url: item.link,
           guid: item.guid,
@@ -50,13 +50,13 @@ var feedHandler = {
           source: feedHandler.getSourceFromLink(item.link)
         };
 
-        if (!!Dates.findOne({'feeds.guid': item.guid})) {
+        if (!!Flights.findOne({'feeds.guid': item.guid})) {
           console.log('Already exists.');
           continue;
         }
 
         try {
-          Dates.update({date: today}, {$addToSet: {feeds: newFeed}});
+          Flights.update({date: today}, {$addToSet: {feeds: newItem}});
         } catch (error) {
           console.log(error);
         }
@@ -74,7 +74,7 @@ var feedHandler = {
   }
 };
 
-fetchFeeds = function () {
+fetchItems = function () {
   feedUrls.forEach(function (feedUrl) {
     var rssContent = HTTP.get(feedUrl).content;
     feedHandler.call(rssContent);

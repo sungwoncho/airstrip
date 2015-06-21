@@ -1,12 +1,14 @@
-<template name="feed">
-  <article class='feed-item'>
+<template name="item">
+  <article class='item'>
     <figure class='source-badge'>
       <img src="{{sourceBadgeUrl}}" alt="{{source}}">
     </figure>
 
     <div class="item-info">
-      <h2>
-        <a href="{{url}}" target="_blank">{{title}}</a>
+      <h2 class="item-title">
+        <a href="{{url}}" target="_blank">
+          {{title}}
+        </a>
       </h2>
 
       <ul class="secondary-info">

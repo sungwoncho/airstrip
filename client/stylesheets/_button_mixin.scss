@@ -1,0 +1,16 @@
+@mixin regular-button($border: $orange, $fill: transparent, $hover-fill: $orange) {
+  border: 1px solid $border;
+  padding: 0.8em 2.4em;
+  background-color: $fill;
+  display: inline-block;
+  @include transition(all 0.15s linear);
+
+  &:hover {
+    background-color: $hover-fill;
+    color: #fff;
+  }
+}
+
+.btn {
+  @include regular-button;
+}

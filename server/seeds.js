@@ -1,9 +1,10 @@
 Meteor.startup(function () {
-  if (Dates.find().count() === 0) {
+  if (Flights.find().count() === 0) {
     [
       {
-        date: moment('2015-05-01').format('MMMM D, YYYY'),
-        feeds: [
+        number: 1,
+        date: moment('2015-05-01').format('YYYYMMDD'),
+        items: [
           {
             title: 'Just arrived here in Chicago',
             source: 'www.reddit.com',
@@ -31,8 +32,8 @@ Meteor.startup(function () {
         ]
       },
       {
-        date: moment('2015-05-02').format('MMMM D, YYYY'),
-        feeds: [
+        date: moment('2015-05-02').format('YYYYMMDD'),
+        items: [
           {
             title: 'What up guys',
             source: 'www.reddit.com',
@@ -58,9 +59,125 @@ Meteor.startup(function () {
             author: 'Jake Ellenburger'
           }
         ]
-      }
-    ].forEach(function (feed) {
-      Dates.insert(feed);
+      },
+    {
+      date: moment('2015-05-03').format('YYYYMMDD'),
+      items: [
+        {
+          title: 'What up guys',
+          source: 'www.reddit.com',
+          url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel',
+          author: 'drake001'
+        },
+        {
+          title: 'Any meetup here?',
+          source: 'www.nomadforum.io',
+          url: '#',
+          author: 'thenewguy'
+        },
+        {
+          title: 'Should I get a mac?',
+          source: 'www.nomadforum.io',
+          url: 'https://nomadforum.io/t/digital',
+          author: 'jane005'
+        },
+        {
+          title: 'US citizen visa required?',
+          source: 'www.reddit.com',
+          url: 'http://www.nytimes.com/2015/06/14/fashion/a-curious-midlife-crisis-for-a-tech-entrepreneur.html?emc=eta1',
+          author: 'Jake Ellenburger'
+        }
+      ]
+    },
+    {
+      date: moment('2015-05-04').format('YYYYMMDD'),
+      items: [
+        {
+          title: 'What up guys',
+          source: 'www.reddit.com',
+          url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel',
+          author: 'drake001'
+        },
+        {
+          title: 'Any meetup here?',
+          source: 'www.nomadforum.io',
+          url: '#',
+          author: 'thenewguy'
+        },
+        {
+          title: 'Should I get a mac?',
+          source: 'www.nomadforum.io',
+          url: 'https://nomadforum.io/t/digital',
+          author: 'jane005'
+        },
+        {
+          title: 'US citizen visa required?',
+          source: 'www.reddit.com',
+          url: 'http://www.nytimes.com/2015/06/14/fashion/a-curious-midlife-crisis-for-a-tech-entrepreneur.html?emc=eta1',
+          author: 'Jake Ellenburger'
+        }
+      ]
+    },
+    {
+      date: moment('2015-05-05').format('YYYYMMDD'),
+      items: [
+        {
+          title: 'What up guys',
+          source: 'www.reddit.com',
+          url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel',
+          author: 'drake001'
+        },
+        {
+          title: 'Any meetup here?',
+          source: 'www.nomadforum.io',
+          url: '#',
+          author: 'thenewguy'
+        },
+        {
+          title: 'Should I get a mac?',
+          source: 'www.nomadforum.io',
+          url: 'https://nomadforum.io/t/digital',
+          author: 'jane005'
+        },
+        {
+          title: 'US citizen visa required?',
+          source: 'www.reddit.com',
+          url: 'http://www.nytimes.com/2015/06/14/fashion/a-curious-midlife-crisis-for-a-tech-entrepreneur.html?emc=eta1',
+          author: 'Jake Ellenburger'
+        }
+      ]
+    },
+    {
+      date: moment('2015-05-06').format('YYYYMMDD'),
+      items: [
+        {
+          title: 'What up guys',
+          source: 'www.reddit.com',
+          url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel',
+          author: 'drake001'
+        },
+        {
+          title: 'Any meetup here?',
+          source: 'www.nomadforum.io',
+          url: '#',
+          author: 'thenewguy'
+        },
+        {
+          title: 'Should I get a mac?',
+          source: 'www.nomadforum.io',
+          url: 'https://nomadforum.io/t/digital',
+          author: 'jane005'
+        },
+        {
+          title: 'US citizen visa required?',
+          source: 'www.reddit.com',
+          url: 'http://www.nytimes.com/2015/06/14/fashion/a-curious-midlife-crisis-for-a-tech-entrepreneur.html?emc=eta1',
+          author: 'Jake Ellenburger'
+        }
+      ]
+    }
+  ].forEach(function (flight) {
+      Meteor.call('addFlight', flight);
     });
   }
 });
