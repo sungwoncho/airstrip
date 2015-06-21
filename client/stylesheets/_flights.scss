@@ -23,13 +23,24 @@
     display: inline-block;
     padding-right: 1.5em;
   }
+
+  @include media($mobile) {
+    @include span-columns(12 of 12);
+    @include shift(0);
+  }
 }
 
 .source-badge {
   @include span-columns(1 of 12);
 
+  @include media($tablet) {
+    @include span-columns(2 of 12);
+    text-align: center;
+  }
+
   @include media($mobile) {
-    @include span-columns(1 of 4);
+    @include span-columns(4 of 4);
+    margin-bottom: 0.5em;
   }
 
   img {
@@ -40,12 +51,20 @@
 .item-info {
   @include span-columns(11 of 12);
 
-  @include media($mobile) {
-    @include span-columns(3 of 4);
+  @include media($tablet) {
+    @include span-columns(10 of 12);
   }
 
-  h2 {
+  @include media($mobile) {
+    @include span-columns(4 of 4);
+  }
+
+  .item-title {
     margin-top: 0;
+
+    @include media($mobile) {
+      font-size: 1.2em;
+    }
   }
 }
 
@@ -57,8 +76,23 @@
   background-color: $light-orange;
   padding: 3em 10em;
 
+  @include media($mobile) {
+    padding: 1em 0;
+    text-align: center;
+  }
+
   li {
     display: inline-block;
     padding-right: 1.5em;
+
+    @include media($mobile) {
+      display: block;
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+
+  .action {
+    margin-top: 2.5em;
   }
 }

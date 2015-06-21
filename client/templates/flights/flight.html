@@ -18,6 +18,7 @@
 
 
   <aside class="recent-flights">
+    <h2>Recent Flights</h2>
     <ul>
       {{#each recentFlights}}
         <li>
@@ -35,8 +36,10 @@
       {{/each}}
     </ul>
 
-    <a href="{{pathFor route='flight.index'}}" class='btn'>
-      View all flights
-    </a>
+    <div class="action">
+      <a href="{{pathFor route='flight.index'}}" class='btn'>
+        View all flights
+      </a>
+    </div>
   </aside>
 </template>
