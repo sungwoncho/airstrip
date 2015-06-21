@@ -10,12 +10,22 @@
     text-align: center;
     color: #fff;
     letter-spacing: 5px;
+
+    .brand {
+      @include media($mobile) {
+        font-size: 1.2em;
+      }  
+    }
   }
 
-  h2 {
+  .intro {
     margin: 0;
     text-align: center;
     color: #fff;
     font-size: 3em;
+
+    @include media($mobile) {
+      font-size: 1.5em;
+    }
   }
 }
