@@ -8,5 +8,7 @@
 @import "variables";
 @import "global";
 
-@import "feeds";
+@import 'button_mixin';
+
+@import "flights";
 @import "home";
