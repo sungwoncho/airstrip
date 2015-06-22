@@ -1,5 +1,5 @@
 Template.subscribe.events({
-  'click .subscribe-btn': function () {
+  'click .subscribe-btn, click .dismiss': function () {
     Session.set('subscribed', true);
   }
 });

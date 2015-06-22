@@ -17,6 +17,11 @@
     @include regular-button($type: solid);
     cursor: pointer;
   }
+
+  .dismiss {
+    float: right;
+    text-decoration: none;
+  }
 }
 
 .invitation {
