@@ -1,5 +1,5 @@
 Template.flights.helpers({
   allFlights: function () {
-    return Flights.find();
+    return Flights.find({}, {sort: {date: -1}});
   }
 });

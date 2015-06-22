@@ -1,8 +1,18 @@
 <template name="flights">
-  {{#each allFlights}}
-    <a href="{{pathFor route='flight.show'}}">
-      {{number}}
-      {{date}}
-    </a>
-  {{/each}}
+  <ul class="flight-index">
+    {{#each allFlights}}
+      <li>
+        <h2>
+          <a href="{{pathFor route='flight.show'}}">
+            Flight #{{number}}
+          </a>
+        </h2>
+
+        <time class="flight-day">
+          <i class="fa fa-plane"></i>
+          {{formatDate date}}
+        </time>
+      </li>
+    {{/each}}
+  </ul>
 </template>

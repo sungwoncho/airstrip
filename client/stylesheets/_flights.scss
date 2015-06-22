@@ -96,3 +96,22 @@
     margin-top: 2.5em;
   }
 }
+
+.flight-index {
+  @include outer-container;
+
+  li {
+    @include span-columns(4 of 12);
+    @include omega(3n);
+    margin-bottom: 3em;
+
+    @include media($mobile) {
+      @include span-columns(4 of 4);
+      text-align: center;
+    }
+  }
+
+  .flight-day {
+    color: darken($gray, 20%);
+  }
+}
