@@ -81,14 +81,17 @@
     text-align: center;
   }
 
+  ul {
+    @include outer-container;
+  }
+
   li {
     display: inline-block;
-    padding-right: 1.5em;
+    @include span-columns(3 of 12);
 
     @include media($mobile) {
-      display: block;
       text-align: center;
-      padding-right: 0;
+      @include span-columns(4 of 4);
     }
   }
 
