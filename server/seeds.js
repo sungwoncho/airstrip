@@ -11,25 +11,29 @@ Meteor.startup(function () {
               title: Fake.sentence(5),
               source: 'www.reddit.com',
               url: 'http://www.reddit.com/r/digitalnomad/comments/39ytta/asking_employer_to_allow_work_remotely_for_travel/',
-              author: 'yayman91'
+              author: 'yayman91',
+              hidden: false
             },
             {
               title: Fake.sentence(5),
               source: 'some.blog.com',
               url: 'https://some.blog.com/post/123',
-              author: 'pdfrules'
+              author: 'pdfrules',
+              hidden: false
             },
             {
               title: Fake.sentence(5),
               source: 'www.nomadforum.io',
               url: 'https://nomadforum.io/t/digital-nomad-101-how-to-become-a-digital-nomad/465',
-              author: 'jane005'
+              author: 'jane005',
+              hidden: false
             },
             {
               title: Fake.sentence(5),
               source: 'www.nomadlist.com',
               url: 'https://nomadlist.com/stories/iwantmyname-works-remotely?utm_content=buffer6e883&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer',
-              author: 'Jake Ellenburger'
+              author: 'Jake Ellenburger',
+              hidden: false
             }
           ]
         };

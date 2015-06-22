@@ -47,7 +47,8 @@ var feedHandler = {
           guid: item.guid,
           author: item.author,
           description: item.description,
-          source: feedHandler.getSourceFromLink(item.link)
+          source: feedHandler.getSourceFromLink(item.link),
+          hidden: false
         };
 
         if (!!Flights.findOne({'feeds.guid': item.guid})) {

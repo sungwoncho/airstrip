@@ -1,5 +1,7 @@
 <template name="items">
   {{#each items}}
-    {{> item}}
+    {{#unless hidden}}
+      {{> item}}
+    {{/unless}}
   {{/each}}
 </template>
