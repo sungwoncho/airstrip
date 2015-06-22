@@ -21,3 +21,13 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.spinner {
+  text-align: center;
+  padding: 3em;
+  font-size: 3em;
+
+  .fa-spin {
+    animation: fa-spin 1s infinite linear;
+  }
+}
