@@ -1,14 +1,27 @@
-@mixin regular-button($border: $orange, $fill: transparent, $hover-fill: $orange) {
+@mixin regular-button($type: outline, $border: $orange, $base-color: $orange, $hover-color: $orange) {
   border: 1px solid $border;
   padding: 0.8em 2.4em;
-  background-color: $fill;
   display: inline-block;
   @include transition(all 0.15s linear);
 
-  &:hover {
-    background-color: $hover-fill;
-    color: #fff;
-  }
+  @if $type == solid {
+      background: $base-color;
+      color: #fff;
+
+      &:hover {
+        border-color: $hover-color;
+        background: transparent;
+        color: $base-color;
+      }
+    } @else if $type == outline {
+      background: transparent;
+      color: $base-color;
+
+      &:hover {
+        background: $hover-color;
+        color: #fff;
+      }
+    }
 }
 
 .btn {

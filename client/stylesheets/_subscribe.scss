@@ -1,0 +1,24 @@
+.subscribe-flash {
+  background-color: $light-orange;
+}
+
+.subscribe-cta {
+  @include flash($light-orange);
+
+  input.email {
+    @include pretty-input($width: 300px);
+
+    @include media($mobile) {
+      @include pretty-input($width: 200px);
+    }
+  }
+
+  .subscribe-btn {
+    @include regular-button($type: solid);
+    cursor: pointer;
+  }
+}
+
+.invitation {
+  margin-top: 0;
+}
