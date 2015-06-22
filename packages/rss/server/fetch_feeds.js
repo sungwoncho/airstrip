@@ -37,7 +37,7 @@ var feedHandler = {
 
       // If date doc does not exist, make one.
       if (dateDoc.count() === 0) {
-        Flights.addFlight({date: today, feeds: []});
+        Meteor.call('addFlight', {date: today, feeds: []});
       }
 
       while(item = stream.read()) {
@@ -57,7 +57,7 @@ var feedHandler = {
         }
 
         try {
-          Flights.update({date: today}, {$addToSet: {feeds: newItem}});
+          Flights.update({date: today}, {$addToSet: {items: newItem}});
         } catch (error) {
           console.log(error);
         }
