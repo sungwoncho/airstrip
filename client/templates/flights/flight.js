@@ -8,7 +8,7 @@ getShownItems = function (flight) {
 
 Template.flight.helpers({
   recentFlights: function () {
-    return Flights.find({}, {sort: {date: -1}});
+    return Flights.find({}, {sort: {date: -1}, limit: 4});
   },
 
   itemCount: function () {
