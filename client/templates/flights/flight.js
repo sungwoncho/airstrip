@@ -13,3 +13,8 @@ Template.flight.helpers({
     return uniqSources;
   }
 });
+
+
+Template.flight.onRendered(function () {
+  twttr.widgets.load();
+});
