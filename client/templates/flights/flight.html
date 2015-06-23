@@ -12,6 +12,20 @@
     </time>
   </section>
 
+  <section class="captains-log">
+    <p>
+      Today's flight has {{itemCount}} stories received from:
+    </p>
+
+    <ul>
+      {{#each sources}}
+        <li>
+          <a href="http://{{this}}">{{this}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+
   <section class="item-list">
     {{> items}}
   </section>
