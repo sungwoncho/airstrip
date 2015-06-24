@@ -85,6 +85,7 @@ fetchItems = function () {
     var rssContent = HTTP.get(feedUrl).content;
     feedHandler.call(rssContent);
   });
+  PostTweetForFlight.post(Flights.findOne());
 };
 
 Meteor.methods({

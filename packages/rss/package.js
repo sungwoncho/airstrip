@@ -5,7 +5,9 @@ Package.describe({
 });
 
 Npm.depends({
-  'feedparser': '1.1.3'
+  'feedparser': '1.1.3',
+  'twit': '1.1.20',
+  'sinon': '1.15.3'
 });
 
 Package.onUse(function(api) {
@@ -19,12 +21,17 @@ Package.onUse(function(api) {
   api.addFiles([
     'server/cron.js',
     'server/fetch_feeds.js',
-    'server/lib/start.js'
+    'server/lib/start.js',
+    'server/tweet.js'
   ], 'server');
+
+  api.export('PostTweetForFlight');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('rss');
-  api.addFiles('tests/rss-tests.js');
+  api.addFiles([
+    'tests/tweet_test.js'
+  ], 'server');
 });
