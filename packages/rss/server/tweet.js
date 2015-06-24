@@ -1,4 +1,4 @@
-var Twit = Npm.require('Twit');
+var Twit = Npm.require('twit');
 
 PostTweetForFlight = {
   post: function (flight) {
