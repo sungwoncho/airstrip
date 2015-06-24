@@ -37,4 +37,8 @@ ul {
   float: left;
   left: 0;
   bottom: 0;
+
+  @include media($mobile) {
+    display: none;
+  }
 }
