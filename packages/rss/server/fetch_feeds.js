@@ -85,7 +85,9 @@ fetchItems = function () {
     var rssContent = HTTP.get(feedUrl).content;
     feedHandler.call(rssContent);
   });
-  PostTweetForFlight.post(Flights.findOne());
+
+  var latestFlight = Flights.find().sort({number: -1}).limit(1);
+  PostTweetForFlight.post(latestFlight);
 };
 
 Meteor.methods({
