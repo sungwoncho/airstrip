@@ -32,3 +32,8 @@ Router.route('/f', {
     return Meteor.subscribe('all-flights');
   }
 });
+
+Router.route('/control_tower', {
+  name: 'control_tower',
+  template: 'control_tower'
+});

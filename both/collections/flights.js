@@ -12,5 +12,14 @@ Meteor.methods({
     Flights.insert(doc);
 
     return doc._id;
+  },
+
+  'hideItem': function (itemGuid) {
+    if (!Meteor.user().isAdmin) {
+      return;
+    }
+
+    var flight = Flights.findOne({'items.guid': itemGuid});
+    Flights.update({_id: flight._id, 'items.guid': itemGuid}, {$set: {'items.$.hidden': true}});
   }
 });
