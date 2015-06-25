@@ -16,3 +16,11 @@ Template.item.helpers({
     return fullUrl.hostname;
   }
 });
+
+Template.item.events({
+  'click .hide-item': function (e) {
+    e.preventDefault();
+
+    Meteor.call('hideItem', this.guid);
+  }
+});

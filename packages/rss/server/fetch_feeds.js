@@ -12,20 +12,28 @@ var feedUrls = [
   'http://www.tropicalmba.com/feed/'
 ];
 
-var streamGetter = {
-  call: function (content) {
-    var stream = new Readable();
-    stream._read = function() {}; // Set it to no-op in order to push to stream.
+var streamGetter = function (content) {
+  var stream = new Readable();
+  stream._read = function() {}; // Set it to no-op in order to push to stream.
 
-    stream.push(content);
-    return stream;
-  }
+  stream.push(content);
+  return stream;
 };
 
-var feedHandler = {
-  call: function (rawContent) {
+ItemFetcher = {
+  fetch: function () {
+    feedUrls.forEach(function (feedUrl) {
+      var rssContent = HTTP.get(feedUrl).content;
+      ItemFetcher._handleFeed(rssContent);
+    });
+
+    var latestFlight = Flights.findOne({}, {sort: {number: -1}, limit: 1});
+    PostTweetForFlight.post(latestFlight);
+  },
+
+  _handleFeed: function (rawContent) {
     var feedParser = new FeedParser(),
-        stream = streamGetter.call(rawContent);
+        stream = streamGetter(rawContent);
 
     stream.pipe(feedParser);
 
@@ -35,63 +43,46 @@ var feedHandler = {
 
     feedParser.on('readable', Meteor.bindEnvironment(function () {
       var stream = this,
-          meta = this.meta,
-          today = moment().format('YYYYMMDD'),
-          dateDoc = Flights.find({date: today}),
-          item;
+          today = moment().format('YYYYMMDD');
 
-      // If date doc does not exist, make one.
-      if (dateDoc.count() === 0) {
-        Meteor.call('addFlight', {date: today, feeds: []});
+      // If flight not exist, make one.
+      if (Flights.find({date: today}).count() === 0) {
+        Meteor.call('addFlight', {date: today, items: []});
       }
 
-      while(item = stream.read()) {
+      while (item = stream.read()) {
         var newItem = {
           title: item.title,
           url: item.link,
-          guid: item.guid,
+          guid: item.guid || item.link,
           author: item.author,
           description: item.description,
-          source: feedHandler.getSourceFromLink(item.link),
+          source: ItemFetcher._getSourceFromLink(item.link),
           hidden: false
         };
 
-        if (!!Flights.findOne({'feeds.guid': item.guid})) {
-          console.log('Already exists.');
-          continue;
-        }
-
-        try {
+        // If item already exists, do not update
+        if (!!Flights.findOne({'items.guid': item.guid})) {
+          console.log(item.title + ': already exists.');
+        } else {
           Flights.update({date: today}, {$addToSet: {items: newItem}});
-        } catch (error) {
-          console.log(error);
         }
       }
-
 
     }, function (error) {
       console.log('Could not bind environment. ERROR: ' + error);
     }, feedParser));
   },
 
-  getSourceFromLink: function (link) {
+  _getSourceFromLink: function (link) {
     var parsedUrl = Url.parse(link);
     return parsedUrl.host;
   }
 };
 
-fetchItems = function () {
-  feedUrls.forEach(function (feedUrl) {
-    var rssContent = HTTP.get(feedUrl).content;
-    feedHandler.call(rssContent);
-  });
-
-  var latestFlight = Flights.find().sort({number: -1}).limit(1);
-  PostTweetForFlight.post(latestFlight);
-};
-
+// a convenience method to trigger and test fetch in browser console
 Meteor.methods({
   allWeNeedIsFetch: function () {
-    fetchItems();
+    ItemFetcher.fetch();
   }
 });

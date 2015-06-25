@@ -10,3 +10,8 @@ Meteor.publish('all-flights', function () {
 Meteor.publish('flight', function (date) {
   return Flights.find({date: date});
 });
+
+Meteor.publish('userData', function () {
+  return Meteor.users.find({_id: this.userId},
+                           {fields: {'isAdmin': 1}});
+});

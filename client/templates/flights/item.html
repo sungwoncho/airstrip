@@ -11,6 +11,10 @@
         </a>
       </h2>
 
+      {{#if currentUser.isAdmin}}
+        <a href="#" class="hide-item">x</a>
+      {{/if}}
+
       <ul class="secondary-info">
         <li>{{author}}</li>
         <li>{{source}}</li>
