@@ -4,7 +4,7 @@ Meteor.publish('recent-flights', function (options) {
 });
 
 Meteor.publish('all-flights', function () {
-  return Flights.find();
+  return Flights.find({}, {fields: {number: 1, date: 1}});
 });
 
 Meteor.publish('flight', function (date) {
