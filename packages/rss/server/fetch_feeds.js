@@ -56,7 +56,6 @@ ItemFetcher = {
           url: item.link,
           guid: item.guid || item.link,
           author: item.author,
-          description: item.description,
           source: ItemFetcher._getSourceFromLink(item.link),
           hidden: false
         };
