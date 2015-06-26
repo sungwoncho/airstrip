@@ -3,6 +3,10 @@ Router.configure({
   loadingTemplate: 'loading'
 });
 
+Router.onRun(function () {
+  analytics.page();
+});
+
 Router.route('/', {
   name: 'home',
   template: 'flight',

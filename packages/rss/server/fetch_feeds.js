@@ -4,7 +4,7 @@ var Readable = Npm.require('stream').Readable;
 
 var feedUrls = [
   'http://reddit.com/r/digitalnomad/hot.rss',
-  'https://www.kimonolabs.com/api/rss/3f5jp576?apikey=9es3t0vNc6vORrj0s4C6skHz6m4tYfIN',
+  'https://www.kimonolabs.com/api/rss/35ba3k2q?apikey=9es3t0vNc6vORrj0s4C6skHz6m4tYfIN', //nomadforum-new
   'https://nomadlist.com/stories/feed',
   'http://www.hoboceo.com/feed/',
   'https://levels.io/feed/',
