@@ -5,6 +5,7 @@ Router.configure({
 
 Router.onRun(function () {
   analytics.page();
+  this.next();
 });
 
 Router.route('/', {
