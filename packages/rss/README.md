@@ -1,1 +1,0 @@
-Functionalities related to RSS.

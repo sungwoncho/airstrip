@@ -1,4 +1,4 @@
-var Twit = Npm.require('twit');
+var Twit = Meteor.npmRequire('twit');
 
 PostTweetForFlight = {
   post: function (flight) {
@@ -13,8 +13,8 @@ PostTweetForFlight = {
 
   twitterAPI: new Twit({
     consumer_key: 'kqAQtrale59wg7ymyppxnNQYY',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    consumer_secret: Meteor.settings.twitterConsumerSecret,
     access_token: '3244714110-yatEahozepvmYNPIp7ODzjzS2MCYeG57D0QC6q1',
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+    access_token_secret: Meteor.settings.twitterAccessTokenSecret
   })
 };
