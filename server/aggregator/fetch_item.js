@@ -74,7 +74,7 @@ ItemFetcher = {
     });
 
     var latestFlight = Flights.findOne({}, {sort: {number: -1}, limit: 1});
-    PostTweetForFlight.post(latestFlight);
+    Tweet.postForFlight(latestFlight);
   }
 };
 

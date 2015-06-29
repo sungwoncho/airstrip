@@ -1,7 +1,7 @@
 var Twit = Meteor.npmRequire('twit');
 
-PostTweetForFlight = {
-  post: function (flight) {
+Tweet = {
+  postForFlight: function (flight) {
     var tweetMessage = "✈✈✈ Flight #" + flight.number + " on @airstripio - http://airstrip.io/f/" + flight.date + " #digitalnomad";
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, function (err, data, response) {
