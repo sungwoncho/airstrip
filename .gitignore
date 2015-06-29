@@ -1,1 +1,5 @@
 .DS_Store
+
+# Meteor-up files
+settings.json
+mup.json
