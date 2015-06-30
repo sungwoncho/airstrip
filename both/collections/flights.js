@@ -21,5 +21,22 @@ Meteor.methods({
 
     var flight = Flights.findOne({'items.guid': itemGuid});
     Flights.update({_id: flight._id, 'items.guid': itemGuid}, {$set: {'items.$.hidden': true}});
+  },
+
+  'unhideItem': function (itemGuid) {
+    if (!Meteor.user().isAdmin) {
+      return;
+    }
+
+    var flight = Flights.findOne({'items.guid': itemGuid});
+    Flights.update({_id: flight._id, 'items.guid': itemGuid}, {$set: {'items.$.hidden': false}});
+  },
+
+  'addItem': function (flightNumber, item) {
+    if (!Meteor.user().isAdmin) {
+      return;
+    }
+
+    Flights.update({number: flightNumber}, {$addToSet: {items: item}});
   }
 });

@@ -5,13 +5,15 @@
 @import 'bourbon/bourbon';
 @import 'neat/neat';
 
-@import "variables";
-@import "global";
+@import 'variables';
+@import 'global';
 
 @import 'button_mixin';
-@import "flash_mixin";
-@import "input_mixin";
+@import 'flash_mixin';
+@import 'input_mixin';
 
-@import "flights";
-@import "home";
-@import "subscribe";
+@import 'flights';
+@import 'home';
+@import 'subscribe';
+
+@import 'admin/flights';

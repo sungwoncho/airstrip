@@ -1,0 +1,10 @@
+.admin {
+  .actions {
+    float: right;
+  }
+
+  .hidden {
+    text-decoration: line-through;
+    color: $gray;
+  }
+}
