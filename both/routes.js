@@ -40,13 +40,13 @@ Router.route('/f', {
 
 // Admin routes
 Router.onBeforeAction(function () {
-  if (!Meteor.user().isAdmin) {
+  if (!Meteor.user() || !Meteor.user().isAdmin) {
     Router.go('/admin/login');
   } else {
     this.next();
   }
 },{
-  only: ['admin', 'adminFlight.index', 'adminFlight.show']
+  only: ['admin', 'adminFlight.show']
 });
 
 Router.route('/admin', {
@@ -57,7 +57,6 @@ Router.route('/admin', {
 });
 
 Router.route('/admin/login');
-
 Router.route('/admin/f/:date', {
   name: 'adminFlight.show',
   template: 'adminFlight',
