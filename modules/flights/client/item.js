@@ -18,12 +18,6 @@ Template.item.helpers({
 });
 
 Template.item.events({
-  'click .hide-item': function (e) {
-    e.preventDefault();
-
-    Meteor.call('hideItem', this.guid);
-  },
-
   'click .item-link': function (e, tpl) {
     analytics.track('Clicked an item', {
       itemGuid: this.guid

@@ -1,27 +1,23 @@
-getShownItems = function (flight) {
-  var shownItems = _.filter(flight.items, function (item) {
-    return item.hidden === false;
-  });
-
-  return shownItems;
-};
-
 Template.flight.helpers({
   recentFlights: function () {
     return Flights.find({}, {sort: {date: -1}, limit: 4});
   },
 
   itemCount: function () {
-    return getShownItems(this).length;
+    return Items.find({'hidden': false}).count();
   },
 
   sources: function () {
-    var sources = _.pluck(getShownItems(this), 'source');
+    var items = Items.find({'hidden': false}).fetch();
+    var sources = _.pluck(items, 'source');
     var uniqSources = _.uniq(sources);
     return uniqSources;
+  },
+
+  items: function () {
+    return Items.find({'hidden': false});
   }
 });
-
 
 Template.flight.onRendered(function () {
   twttr.widgets.load();

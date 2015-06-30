@@ -35,7 +35,9 @@
   </section>
 
   <section class="item-list">
-    {{> items}}
+    {{#each items}}
+      {{> item}}
+    {{/each}}
   </section>
 
 

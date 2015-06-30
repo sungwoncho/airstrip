@@ -7,7 +7,7 @@ Template.adminFlight.helpers({
 Template.adminFlight.events({
   'click .toggle-visibility': function (e) {
     e.preventDefault();
-    Meteor.call('toggleItemVisibility', this.guid);
+    Meteor.call('toggleHidden', this._id);
   },
 
   'submit form.add-item': function (e, tpl) {
@@ -21,10 +21,10 @@ Template.adminFlight.events({
       url: url,
       guid: url,
       source: source,
-      hidden: false
+      createdAt: new Date()
     };
 
-    Meteor.call('addItem', this.number, item, function (error, response) {
+    Meteor.call('createItem', item, moment().format('YYYYMMDD'), function (error, response) {
       if (error)
         console.log(error);
     });

@@ -16,7 +16,11 @@ Router.route('/f/:date', {
     return Flights.findOne({date: this.params.date});
   },
   waitOn: function () {
-    return [Meteor.subscribe('recent-flights', {limit: 4}), Meteor.subscribe('flight', this.params.date)];
+    return [
+      Meteor.subscribe('recent-flights', {limit: 4}),
+      Meteor.subscribe('flight', this.params.date),
+      Meteor.subscribe('items', this.params.date)
+    ];
   }
 });
 

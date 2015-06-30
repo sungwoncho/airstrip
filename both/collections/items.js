@@ -7,14 +7,19 @@ var ItemSchema = new SimpleSchema({
   url: {
     type: String
   },
+  guid: {
+    type: String
+  },
   source: {
     type: String
   },
   author: {
-    type: String
+    type: String,
+    optional: true
   },
   publishedDate: {
-    type: Date
+    type: Date,
+    optional: true
   },
   hidden: {
     type: Boolean,
@@ -32,6 +37,7 @@ Items.attachSchema(ItemSchema);
 Factory.define('item', Items, {
   title: 'example title',
   url: 'http://example.com',
+  guid: 'http://example.com',
   source: 'example.com',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
@@ -41,6 +47,10 @@ Factory.define('item', Items, {
 Meteor.methods({
   'createItem': function (item, date) {
     if (!Meteor.isServer && !Meteor.user().isAdmin) return null;
+    if (Items.find({'guid': item.guid}).count() > 0) {
+      console.log(item.title + ' is duplicate.');
+      return;
+    }
 
     var newItemId = Items.insert(item);
     var flight = Flights.findOne({date: date});

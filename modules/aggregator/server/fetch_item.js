@@ -22,13 +22,7 @@ var streamGetter = function (content) {
 
 var handleFeed = function (rawContent) {
   var feedParser = new FeedParser(),
-      stream = streamGetter(rawContent),
-      today = moment().format('YYYYMMDD');
-
-  // If flight not exist, make one.
-  if (Flights.find({date: today}).count() === 0) {
-    Meteor.call('createFlight', {date: today, items: []});
-  }
+      stream = streamGetter(rawContent);
 
   stream.pipe(feedParser);
 
@@ -38,26 +32,22 @@ var handleFeed = function (rawContent) {
 
   feedParser.on('readable', Meteor.bindEnvironment(function () {
     var stream = this,
-    item = stream.read();
+        item = stream.read(),
+        today = moment().format('YYYYMMDD');
 
     var newItem = {
       title: item.title,
       url: item.link,
       guid: item.guid || item.link,
-      author: item.author,
       source: getSourceFromLink(item.link),
-      hidden: false
+      author: item.author,
+      createdAt: new Date()
     };
 
-    // If item already exists, do not update
-    if (!!Flights.findOne({'items.guid': item.guid})) {
-      console.log(item.title + ': already exists.');
-    } else {
-      Flights.update({date: today}, {$addToSet: {items: newItem}});
-    }
+    Meteor.call('createItem', newItem, today);
 
   }, function (error) {
-    console.log('Could not bind environment. ERROR: ' + error);
+    console.log('Error occurred: ' + error);
   }, feedParser));
 };
 
@@ -68,6 +58,8 @@ var getSourceFromLink = function (link) {
 
 ItemFetcher = {
   fetch: function () {
+    Meteor.call('createFlight', {date: moment().format('YYYYMMDD'), itemIds: []});
+
     feedUrls.forEach(function (feedUrl) {
       var rssContent = HTTP.get(feedUrl).content;
       handleFeed(rssContent);

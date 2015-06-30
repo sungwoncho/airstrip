@@ -6,10 +6,6 @@ MochaWeb.testOnly(function () {
     Flights.remove({});
   });
 
-  afterEach(function () {
-    stubs.restoreAll();
-  });
-
   describe("createItem method", function(){
     it("creates a flight and an item and adds the item to the flight when no flight exists", function(){
       var newItem = Factory.build('item');
@@ -31,6 +27,14 @@ MochaWeb.testOnly(function () {
       var flight = Flights.findOne({date: '20150630'});
       var item = Items.findOne();
       expect(flight.itemIds[0]).to.equal(item._id);
+    });
+
+    it("does not create item if duplicate exists", function(){
+      var item = Factory.create('item');
+      var newItem = Factory.build('item');
+
+      Meteor.call('createItem', newItem, '20150630');
+      expect(Items.find().count()).to.eq(1);
     });
   });
 
