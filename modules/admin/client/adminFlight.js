@@ -5,14 +5,9 @@ Template.adminFlight.helpers({
 });
 
 Template.adminFlight.events({
-  'click .hide-btn': function (e) {
+  'click .toggle-visibility': function (e) {
     e.preventDefault();
-    Meteor.call('hideItem', this.guid);
-  },
-
-  'click .unhide-btn': function (e) {
-    e.preventDefault();
-    Meteor.call('unhideItem', this.guid);
+    Meteor.call('toggleItemVisibility', this.guid);
   },
 
   'submit form.add-item': function (e, tpl) {

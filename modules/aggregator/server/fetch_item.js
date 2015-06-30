@@ -3,7 +3,7 @@ var Url = Meteor.npmRequire('url');
 var Readable = Meteor.npmRequire('stream').Readable;
 
 var feedUrls = [
-  'http://reddit.com/r/digitalnomad/hot.rss?limit=2',
+  'http://reddit.com/r/digitalnomad/hot.rss',
   'https://www.kimonolabs.com/api/rss/35ba3k2q?apikey=9es3t0vNc6vORrj0s4C6skHz6m4tYfIN', //nomadforum-new
   'https://nomadlist.com/stories/feed',
   'http://www.hoboceo.com/feed/',
@@ -27,7 +27,7 @@ var handleFeed = function (rawContent) {
 
   // If flight not exist, make one.
   if (Flights.find({date: today}).count() === 0) {
-    Meteor.call('addFlight', {date: today, items: []});
+    Meteor.call('createFlight', {date: today, items: []});
   }
 
   stream.pipe(feedParser);

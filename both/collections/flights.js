@@ -1,7 +1,31 @@
 Flights = new Mongo.Collection('flights');
 
+var FlightSchema = new SimpleSchema({
+  date: {
+    type: String
+  },
+  number: {
+    type: Number
+  },
+  itemIds: {
+    type: [Number]
+  },
+  createdAt: {
+    type: Date,
+    denyUpdate: true
+  }
+});
+
+// Factory to generate test fixture
+Factory.define('flight', Flights, {
+  date: '20150630',
+  number: '18',
+  itemIds: [],
+  createdAt: new Date(2015, 06, 30)
+});
+
 Meteor.methods({
-  'addFlight': function (doc) {
+  'createFlight': function (doc) {
     try {
       currentFlightNumber = Flights.findOne({}, {sort: {number: -1}}).number;
     } catch (e) {
@@ -12,31 +36,5 @@ Meteor.methods({
     Flights.insert(doc);
 
     return doc._id;
-  },
-
-  'hideItem': function (itemGuid) {
-    if (!Meteor.user().isAdmin) {
-      return;
-    }
-
-    var flight = Flights.findOne({'items.guid': itemGuid});
-    Flights.update({_id: flight._id, 'items.guid': itemGuid}, {$set: {'items.$.hidden': true}});
-  },
-
-  'unhideItem': function (itemGuid) {
-    if (!Meteor.user().isAdmin) {
-      return;
-    }
-
-    var flight = Flights.findOne({'items.guid': itemGuid});
-    Flights.update({_id: flight._id, 'items.guid': itemGuid}, {$set: {'items.$.hidden': false}});
-  },
-
-  'addItem': function (flightNumber, item) {
-    if (!Meteor.user().isAdmin) {
-      return;
-    }
-
-    Flights.update({number: flightNumber}, {$addToSet: {items: item}});
   }
 });
