@@ -18,7 +18,7 @@ Migrations.add({
   version: 2,
   name: "Drop items field",
   up: function () {
-    Flights.update({items: {$exists: true}}, {$unset: {items: ''}});
+    Flights.update({items: {$exists: true}}, {$unset: {items: ''}}, {multi: true});
   },
   down: function () {
 
