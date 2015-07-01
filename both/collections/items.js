@@ -21,6 +21,10 @@ var ItemSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  flightId: {
+    type: String,
+    optional: true
+  },
   hidden: {
     type: Boolean,
     defaultValue: false
@@ -41,6 +45,7 @@ Factory.define('item', Items, {
   source: 'example.com',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
+  flightId: 'a1',
   createdAt: new Date(2015, 6, 30)
 });
 
@@ -52,15 +57,9 @@ Meteor.methods({
       return;
     }
 
-    var newItemId = Items.insert(item);
     var flight = Flights.findOne({date: date});
-
-    // If flight exists, insert item._id to itemIds, otherwise create a flight
-    if (!!flight) {
-      Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
-    } else {
-      Meteor.call('createFlight', {date: date, itemIds: [newItemId]});
-    }
+    var newItemId = Items.insert(_.extend(item, {flightId: flight._id}));
+    Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
   },
 
   'toggleHidden': function (itemId) {

@@ -7,25 +7,19 @@ MochaWeb.testOnly(function () {
   });
 
   describe("createItem method", function(){
-    it("creates a flight and an item and adds the item to the flight when no flight exists", function(){
-      var newItem = Factory.build('item');
-      Meteor.call('createItem', newItem);
-      expect(Flights.find().count()).to.equal(1);
-      expect(Items.find().count()).to.equal(1);
-
-      var flight = Flights.findOne();
-      var item = Items.findOne();
-      expect(flight.itemIds[0]).to.equal(item._id);
-    });
-
-    it("creates and adds an item to the flight when a flight exists", function(){
+    it("creates an item", function(){
+      // Setup
       Factory.create('flight', {date: '20150630'});
       var newItem = Factory.build('item');
-      Meteor.call('createItem', newItem, '20150630');
-      expect(Items.find().count()).to.equal(1);
 
-      var flight = Flights.findOne({date: '20150630'});
+      // Execute
+      Meteor.call('createItem', newItem, '20150630');
+
+      // Verify
+      expect(Items.find().count()).to.equal(1);
+      var flight = Flights.findOne();
       var item = Items.findOne();
+      expect(item.flightId).to.equal(flight._id);
       expect(flight.itemIds[0]).to.equal(item._id);
     });
 

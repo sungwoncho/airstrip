@@ -8,7 +8,7 @@ var FlightSchema = new SimpleSchema({
     type: Number
   },
   itemIds: {
-    type: [Number]
+    type: [String]
   },
   createdAt: {
     type: Date,

@@ -58,7 +58,10 @@ var getSourceFromLink = function (link) {
 
 ItemFetcher = {
   fetch: function () {
-    Meteor.call('createFlight', {date: moment().format('YYYYMMDD'), itemIds: []});
+    var today = moment().format('YYYYMMDD');
+    if (Flights.find({date: today}).count() === 0) {
+      Meteor.call('createFlight', {date: today, itemIds: []});
+    }
 
     feedUrls.forEach(function (feedUrl) {
       var rssContent = HTTP.get(feedUrl).content;
