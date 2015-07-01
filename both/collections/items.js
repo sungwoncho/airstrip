@@ -29,6 +29,10 @@ var ItemSchema = new SimpleSchema({
     type: Boolean,
     defaultValue: false
   },
+  tweeted: {
+    type: Boolean,
+    defaultValue: false
+  },
   createdAt: {
     type: Date,
     denyUpdate: true
@@ -52,10 +56,7 @@ Factory.define('item', Items, {
 Meteor.methods({
   'createItem': function (item, date) {
     if (!Meteor.isServer && !Meteor.user().isAdmin) return null;
-    if (Items.find({'guid': item.guid}).count() > 0) {
-      console.log(item.title + ' is duplicate.');
-      return;
-    }
+    if (Items.find({'guid': item.guid}).count() > 0) return null;
 
     var flight = Flights.findOne({date: date});
     var newItemId = Items.insert(_.extend(item, {flightId: flight._id}));

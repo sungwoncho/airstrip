@@ -25,4 +25,15 @@ Migrations.add({
   }
 });
 
+Migrations.add({
+  version: 3,
+  name: "Add tweeted field to items",
+  up: function () {
+    Items.update({tweeted: {$exists: false}}, {$set: {tweeted: false}}, {multi: true});
+  },
+  down: function () {
+    Items.update({tweeted: {$exists: true}}, {$unset: {tweeted: ''}}, {multi: true});
+  }
+});
+
 Migrations.migrateTo('latest');
