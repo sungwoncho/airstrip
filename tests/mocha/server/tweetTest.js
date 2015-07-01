@@ -48,7 +48,8 @@ MochaWeb.testOnly(function(){
   describe("MessageFactory", function(){
     describe("buildForItem", function(){
       it("returns a string", function(){
-        var item = Factory.build('item');
+        var flight = Factory.create('flight');
+        var item = Factory.build('item', {flightId: flight._id});
         expect(MessageFactory.buildForItem(item)).to.be.a('string');
       });
     });

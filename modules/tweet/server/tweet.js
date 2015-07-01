@@ -4,11 +4,10 @@ Tweet = {
   postForFlight: function (flight) {
     var tweetMessage = MessageFactory.buildForFlight(flight);
 
-    this.twitterAPI.post('statuses/update', {status: tweetMessage}, function (err, data, response) {
-     console.log(data);
-     if (err)
-       console.log(err);
-    });
+    this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
+      if (err)
+        console.log(err);
+    }));
   },
 
   postForItem: function (item) {
