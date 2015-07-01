@@ -65,6 +65,7 @@ npm-container@1.0.0
 observe-sequence@1.0.6
 ordered-dict@1.0.3
 package-version-parser@3.0.3
+percolate:migrations@0.7.5
 percolate:synced-cron@1.2.1
 percolatestudio:segment.io@1.2.2_1
 practicalmeteor:chai@2.1.0_1
