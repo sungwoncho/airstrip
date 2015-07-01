@@ -2,7 +2,7 @@ var Twit = Meteor.npmRequire('twit');
 
 Tweet = {
   postForFlight: function (flight) {
-    var tweetMessage = "✈✈✈ Flight #" + flight.number + " on @airstripio - http://airstrip.io/f/" + flight.date + " #digitalnomad";
+    var tweetMessage = MessageFactory.buildForFlight(flight);
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, function (err, data, response) {
      console.log(data);
@@ -13,7 +13,7 @@ Tweet = {
 
   postForItem: function (item) {
     var flightNumber = Flights.findOne(item.flightId).number;
-    var tweetMessage = "Check out: \"" + item.title + "\"" + " on " + "✈" + flightNumber + " " + item.url;
+    var tweetMessage = MessageFactory.buildForItem(item);
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
       if (response.statusCode === 200) {
