@@ -1,6 +1,15 @@
 Meteor.publish('recent-flights', function (options) {
   var limit = options ? options.limit : 5;
-  return Flights.find({}, {sort: {date: -1}, limit: limit});
+  var flights = Flights.find({}, {sort: {date: -1}, limit: limit});
+  var itemIds = flights.map(function (flight) {
+    return flight.itemIds;
+  });
+  itemIds = _.flatten(itemIds);
+
+  return [
+    Flights.find({}, {sort: {date: -1}, limit: limit}),
+    Items.find({_id: {$in: itemIds}})
+  ];
 });
 
 Meteor.publish('all-flights', function () {
@@ -8,7 +17,12 @@ Meteor.publish('all-flights', function () {
 });
 
 Meteor.publish('flight', function (date) {
-  return Flights.find({date: date});
+  var flight = Flights.findOne({date: date});
+
+  return [
+    Flights.find({date: date}),
+    Items.find({_id: {$in: flight.itemIds}})
+  ];
 });
 
 Meteor.publish('items', function (date) {
