@@ -1,6 +1,10 @@
 Template.adminFlight.helpers({
   getVisibility: function () {
     return this.hidden ? 'hidden' : 'visible';
+  },
+
+  items: function () {
+    return Items.find({flightId: this._id});
   }
 });
 
