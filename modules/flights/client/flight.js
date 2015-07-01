@@ -15,7 +15,7 @@ Template.flight.helpers({
   },
 
   items: function () {
-    return Items.find({'hidden': false});
+    return Items.find({'hidden': false, flightId: this._id});
   }
 });
 
