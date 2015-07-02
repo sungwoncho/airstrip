@@ -13,6 +13,9 @@ var ItemSchema = new SimpleSchema({
   source: {
     type: String
   },
+  sourceUrl: {
+    type: String
+  },
   author: {
     type: String,
     optional: true
@@ -44,9 +47,10 @@ Items.attachSchema(ItemSchema);
 // Factory to generate test fixture
 Factory.define('item', Items, {
   title: 'example title',
-  url: 'http://example.com',
-  guid: 'http://example.com',
-  source: 'example.com',
+  url: 'http://example.com/example_post',
+  guid: 'http://example.com/example_post',
+  source: 'Example',
+  sourceUrl: 'http://www.example.com',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',

@@ -11,8 +11,15 @@ var FeedSchema = new SimpleSchema({
     type: Number,
     allowedValues: [1,2,3,4,5]
   },
-  description: {
+  sourceName: {
     type: String
+  },
+  sourceUrl: {
+    type: String
+  },
+  description: {
+    type: String,
+    optional: true
   },
   createdAt: {
     type: Date,
@@ -23,9 +30,11 @@ var FeedSchema = new SimpleSchema({
 Feeds.attachSchema(FeedSchema);
 
 Factory.define('feed', Feeds, {
-  url: 'https://example.com/rss',
+  url: 'http://www.example.com/rss',
   dailyItemLimit: 3,
   position: 1,
+  sourceName: 'Example',
+  sourceUrl: 'http://www.example.com',
   description: 'Reddit digital nomad hot',
   createdAt: new Date('2015, 06, 30')
 });
@@ -33,7 +42,7 @@ Factory.define('feed', Feeds, {
 Feeds.allow({
   insert: function (userId, doc) {
     var user = Meteor.users.findOne(userId);
-    return user.isAdmin || Meteor.isServer;
+    return user.isAdmin;
   },
 
   update: function (userId, doc, fieldNames, modifier) {

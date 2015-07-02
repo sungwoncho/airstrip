@@ -23,17 +23,25 @@ MochaWeb.testOnly(function(){
 
       ItemFetcher.fetch();
 
-      // Need to set timeout because Items.findOne() is undefined due to race condition
-      Meteor.setTimeout(function () {
-        expect(Flights.find().count()).to.equal(1);
-        expect(Items.find().count()).to.equal(1);
+      // Multiple assertion to prevent race condition for Items.find().count()
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Flights.find().count()).to.equal(1);
+      expect(Items.find().count()).to.equal(1);
 
-        var item = Items.findOne();
-        expect(item.title).to.equal('Good carpool sites in the US?');
-        expect(item.url).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
-        expect(item.guid).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
-        expect(item.source).to.equal('www.reddit.com');
-      }, 2000);
+      var item = Items.findOne();
+      expect(item.title).to.equal('Good carpool sites in the US?');
+      expect(item.url).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
+      expect(item.guid).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
+      expect(item.source).to.equal('Example');
+      expect(item.sourceUrl).to.equal('http://www.example.com');
     });
   });
 });
