@@ -2,16 +2,6 @@ var FeedParser = Meteor.npmRequire('feedparser');
 var Url = Meteor.npmRequire('url');
 var Readable = Meteor.npmRequire('stream').Readable;
 
-var feedUrls = [
-  'http://reddit.com/r/digitalnomad/hot.rss',
-  'https://www.kimonolabs.com/api/rss/35ba3k2q?apikey=9es3t0vNc6vORrj0s4C6skHz6m4tYfIN', //nomadforum-new
-  'https://nomadlist.com/stories/feed',
-  'http://www.hoboceo.com/feed/',
-  'https://levels.io/feed/',
-  'http://joel.is/',
-  'http://www.tropicalmba.com/feed/'
-];
-
 var streamGetter = function (content) {
   var stream = new Readable();
   stream._read = function() {}; // Set it to no-op in order to push to stream.
@@ -58,7 +48,11 @@ var getSourceFromLink = function (link) {
 
 ItemFetcher = {
   fetch: function () {
-    var today = moment().format('YYYYMMDD');
+    var today = moment().format('YYYYMMDD'),
+        feedUrls = Feeds.find().map(function (feed) {
+          return feed.url;
+        });
+
     if (Flights.find({date: today}).count() === 0) {
       Meteor.call('createFlight', {date: today, itemIds: []});
     }

@@ -1,0 +1,32 @@
+<template name="adminFeeds">
+  <h1>Feeds</h1>
+
+  <table class="tables">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Daily item limit</th>
+        <th>Position</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each feeds}}
+        <tr>
+          <td>{{url}}</td>
+          <td>{{dailyItemLimit}}</td>
+          <td>{{position}}</td>
+          <td>{{description}}</td>
+          <td>
+            <a href="#" class="edit-btn">Edit</a>
+            <a href="#" class="remove-btn">Remove</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <hr>
+  {{> quickForm collection="Feeds" id="new-feed-form" type="insert"}}
+</template>
