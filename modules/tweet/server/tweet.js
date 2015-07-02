@@ -2,7 +2,8 @@ var Twit = Meteor.npmRequire('twit');
 
 Tweet = {
   postForFlight: function (flight) {
-    var tweetMessage = MessageFactory.buildForFlight(flight);
+    var flightTweetFactory = new FlightTweetFactory(flight);
+    var tweetMessage = flightTweetFactory.build;
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
       if (err)
@@ -12,7 +13,8 @@ Tweet = {
 
   postForItem: function (item) {
     var flightNumber = Flights.findOne(item.flightId).number;
-    var tweetMessage = MessageFactory.buildForItem(item);
+    var itemTweetFactory = new ItemTweetFactory(item);
+    var tweetMessage = itemTweetFactory.build;
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
       if (response.statusCode === 200) {

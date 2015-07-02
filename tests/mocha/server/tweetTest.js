@@ -45,20 +45,24 @@ MochaWeb.testOnly(function(){
     });
   });
 
-  describe("MessageFactory", function(){
-    describe("buildForItem", function(){
+  describe("ItemTweetFactory", function(){
+    describe("build", function(){
       it("returns a string", function(){
         var flight = Factory.create('flight');
         var item = Factory.build('item', {flightId: flight._id});
-        expect(MessageFactory.buildForItem(item)).to.be.a('string');
+        var itemTweetFactory = new ItemTweetFactory(item);
+
+        expect(itemTweetFactory.build).to.be.a('string');
       });
     });
+  });
 
-    describe("buildForFlight", function(){
-      it("returns a string", function(){
-        var flight = Factory.build('flight');
-        expect(MessageFactory.buildForFlight(flight)).to.be.a('string');
-      });
+  describe("FlightTweetFactory", function(){
+    it("returns a string", function(){
+      var flight = Factory.build('flight');
+      var flightTweetFactory = new FlightTweetFactory(flight);
+
+      expect(flightTweetFactory.build).to.be.a('string');
     });
   });
 });
