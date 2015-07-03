@@ -30,9 +30,6 @@ var getStream = function (content) {
 };
 
 var handleFeed = function (rawContent, feed) {
-  if (Items.find({date: today, source: feed.source}).count() > feed.dailyItemLimit) return;
-  if (Flights.findOne({date: today}).itemIds.length > itemLimitPerFlight) return;
-
   var feedParser = new FeedParser(),
       stream = getStream(rawContent);
 
@@ -44,19 +41,31 @@ var handleFeed = function (rawContent, feed) {
 
   feedParser.on('readable', Meteor.bindEnvironment(function () {
     var stream = this,
-        item = stream.read();
+        flight = Flights.findOne({date: today});
 
-    var newItem = {
-      title: item.title,
-      url: item.link,
-      guid: item.guid || item.link,
-      sourceName: feed.sourceName,
-      sourceUrl: feed.sourceUrl,
-      author: item.author,
-      createdAt: new Date()
-    };
+    while (item = stream.read()) {
+      if (Items.find({flightId: flight._id, sourceName: feed.sourceName}).count() >= feed.dailyItemLimit) {
+        console.log('daily item limit reached for ' + feed.sourceName);
+        return;
+      }
 
-    Meteor.call('createItem', newItem, today);
+      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
+        console.log('item limit reached.');
+        return;
+      }
+
+      var newItem = {
+        title: item.title,
+        url: item.link,
+        guid: item.guid || item.link,
+        sourceName: feed.sourceName,
+        sourceUrl: feed.sourceUrl,
+        author: item.author,
+        createdAt: new Date()
+      };
+
+      Meteor.call('createItem', newItem, today);
+    }
   }, function (error) {
     console.log('Error occurred: ' + error);
   }, feedParser));

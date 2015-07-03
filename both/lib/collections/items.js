@@ -69,6 +69,7 @@ Meteor.methods({
     var flight = Flights.findOne({date: date});
     var newItemId = Items.insert(_.extend(item, {flightId: flight._id}));
     Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
+    console.log('created ' + item.title);
   },
 
   'toggleHidden': function (itemId) {
