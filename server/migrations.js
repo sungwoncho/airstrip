@@ -33,5 +33,20 @@ Migrations.add({
     Items.update({tweeted: {$exists: true}}, {$unset: {tweeted: ''}}, {multi: true});
   }
 });
+//
+// Migrations.add({
+//   version: 4,
+//   name: "Add sourceName, and sourceUrl to replace items.source",
+//   up: function () {
+//     Items.find().forEach(function (item) {
+//       var parsedUrl = Url.parse(item.url);
+//       var sourceName = s.capitalize(parsedUrl.hostname);
+//
+//       Items.update(item._id, {$set: {sourceName: sourceName, sourceUrl: item.url}, $unset: {url: ''}});
+//     });
+//   },
+//   down: function () {
+//   }
+// });
 
 Migrations.migrateTo('latest');

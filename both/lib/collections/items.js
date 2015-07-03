@@ -10,7 +10,7 @@ var ItemSchema = new SimpleSchema({
   guid: {
     type: String
   },
-  source: {
+  sourceName: {
     type: String
   },
   sourceUrl: {
@@ -49,7 +49,7 @@ Factory.define('item', Items, {
   title: 'example title',
   url: 'http://example.com/example_post',
   guid: 'http://example.com/example_post',
-  source: 'Example',
+  sourceName: 'Example',
   sourceUrl: 'http://www.example.com',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),

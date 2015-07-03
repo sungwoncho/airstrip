@@ -50,7 +50,7 @@ var handleFeed = function (rawContent, feed) {
       title: item.title,
       url: item.link,
       guid: item.guid || item.link,
-      source: feed.sourceName,
+      sourceName: feed.sourceName,
       sourceUrl: feed.sourceUrl,
       author: item.author,
       createdAt: new Date()

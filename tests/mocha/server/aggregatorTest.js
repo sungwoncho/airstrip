@@ -40,7 +40,7 @@ MochaWeb.testOnly(function(){
       expect(item.title).to.equal('Good carpool sites in the US?');
       expect(item.url).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
       expect(item.guid).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
-      expect(item.source).to.equal('Example');
+      expect(item.sourceName).to.equal('Example');
       expect(item.sourceUrl).to.equal('http://www.example.com');
     });
   });
