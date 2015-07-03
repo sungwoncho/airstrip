@@ -8,7 +8,7 @@ Template.item.helpers({
       return '/images/redditBadge.png';
     }
 
-    return `/images/${sourceType}Badge.png`;
+    return `/images/${this.sourceType}Badge.png`;
   },
 
   hostUrl: function () {
