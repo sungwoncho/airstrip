@@ -16,6 +16,10 @@ var ItemSchema = new SimpleSchema({
   sourceUrl: {
     type: String
   },
+  sourceType: {
+    type: String,
+    optional: true
+  },
   author: {
     type: String,
     optional: true

@@ -17,6 +17,11 @@ var FeedSchema = new SimpleSchema({
   sourceUrl: {
     type: String
   },
+  sourceType: {
+    type: String,
+    allowedValues: ['blog', 'podcast', 'forum', 'news'],
+    optional: true,
+  },
   description: {
     type: String,
     optional: true
