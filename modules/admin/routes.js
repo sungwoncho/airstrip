@@ -5,7 +5,7 @@ Router.onBeforeAction(function () {
     this.next();
   }
 },{
-  only: ['admin', 'adminFlight.show', 'adminFeeds']
+  only: ['admin', 'adminFlight.show', 'adminFeeds', 'adminFeedEdit']
 });
 
 Router.route('/admin', {

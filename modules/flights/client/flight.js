@@ -13,9 +13,11 @@ Template.flight.helpers({
 
   sources: function () {
     var items = getItemsForFlight(this).fetch();
-    var sources = _.pluck(items, 'source');
+    var sources = _.pluck(items, 'sourceUrl');
     var uniqSources = _.uniq(sources);
-    return uniqSources;
+    return uniqSources.map(function (uniqSource) {
+      return uniqSource.replace(/.*?:\/\//g, ""); // Get rid of http:// or https://
+    });
   },
 
   items: function () {

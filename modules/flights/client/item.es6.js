@@ -4,7 +4,7 @@ Template.item.helpers({
 
     if (_.contains(['nomadlist', 'nomadlist - story', 'nomadforum'], fileName)) {
       return '/images/nomadlistBadge.png';
-    } else if (fileName == 'reddit') {
+    } else if (fileName === 'reddit') {
       return '/images/redditBadge.png';
     }
 
