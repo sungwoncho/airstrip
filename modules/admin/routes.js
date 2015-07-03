@@ -33,3 +33,13 @@ Router.route('/admin/feeds', {
     return Meteor.subscribe('feeds');
   }
 });
+
+Router.route('/admin/feeds/:_id/edit', {
+  name: 'adminFeedEdit',
+  data: function () {
+    return Feeds.findOne();
+  },
+  waitOn: function () {
+    return Meteor.subscribe('feed', this.params._id);
+  }
+});

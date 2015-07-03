@@ -44,14 +44,21 @@ Factory.define('feed', Feeds, {
   createdAt: new Date('2015, 06, 30')
 });
 
+var checkAdminUser = function (userId) {
+  var user = Meteor.users.findOne(userId);
+  return user.isAdmin;
+};
+
 Feeds.allow({
   insert: function (userId, doc) {
-    var user = Meteor.users.findOne(userId);
-    return user.isAdmin;
+    return checkAdminUser(userId);
   },
 
   update: function (userId, doc, fieldNames, modifier) {
-    var user = Meteor.users.findOne(userId);
-    return user.isAdmin;
+    return checkAdminUser(userId);
+  },
+
+  remove: function (userId, doc) {
+    return checkAdminUser(userId);
   }
 });
