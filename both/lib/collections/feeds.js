@@ -40,6 +40,7 @@ Factory.define('feed', Feeds, {
   position: 1,
   sourceName: 'Example',
   sourceUrl: 'http://www.example.com',
+  sourceType: 'blog',
   description: 'Reddit digital nomad hot',
   createdAt: new Date('2015, 06, 30')
 });

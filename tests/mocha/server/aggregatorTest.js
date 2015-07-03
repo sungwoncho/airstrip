@@ -42,9 +42,10 @@ MochaWeb.testOnly(function(){
       expect(item.guid).to.equal('https://www.reddit.com/r/digitalnomad/comments/3bftij/good_carpool_sites_in_the_us/');
       expect(item.sourceName).to.equal('Example');
       expect(item.sourceUrl).to.equal('http://www.example.com');
+      expect(item.sourceType).to.equal('blog');
     });
 
-    it("does not create more than the daily limit form feed", function(){
+    it("does not create more than the daily limit from feed", function(){
       var feed = Factory.create('feed', {dailyItemLimit: 1});
 
       // Return two articles

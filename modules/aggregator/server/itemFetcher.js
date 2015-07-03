@@ -60,6 +60,7 @@ var handleFeed = function (rawContent, feed) {
         guid: item.guid || item.link,
         sourceName: feed.sourceName,
         sourceUrl: feed.sourceUrl,
+        sourceType: feed.sourceType,
         author: item.author,
         createdAt: new Date()
       };
