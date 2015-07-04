@@ -17,6 +17,7 @@ Tweet = {
     var tweetMessage = itemTweetFactory.build;
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
+      if (err) console.log(err);
       if (response.statusCode === 200) {
         Items.update(item._id, {$set: {tweeted: true}});
       }
