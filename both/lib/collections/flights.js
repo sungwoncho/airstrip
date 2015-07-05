@@ -16,6 +16,8 @@ var FlightSchema = new SimpleSchema({
   }
 });
 
+Flights.attachSchema(FlightSchema);
+
 // Factory to generate test fixture
 Factory.define('flight', Flights, {
   date: '20150630',
@@ -33,6 +35,7 @@ Meteor.methods({
     }
 
     doc.number = currentFlightNumber + 1;
+    doc.createdAt = new Date();
     Flights.insert(doc);
 
     return doc._id;

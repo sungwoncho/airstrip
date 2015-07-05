@@ -31,6 +31,20 @@ Meteor.publish('items', function (date) {
   return Items.find({_id: {$in: flight.itemIds}});
 });
 
+Meteor.publish('feeds', function () {
+  var user = Meteor.users.findOne(this.userId);
+  if (user.isAdmin) {
+    return Feeds.find();
+  }
+});
+
+Meteor.publish('feed', function (id) {
+  var user = Meteor.users.findOne(this.userId);
+  if (user.isAdmin) {
+    return Feeds.find(id);
+  }
+});
+
 Meteor.publish('userData', function () {
   return Meteor.users.find({_id: this.userId},
                            {fields: {'isAdmin': 1}});

@@ -10,7 +10,6 @@ Migrations.add({
     });
   },
   down: function () {
-
   }
 });
 
@@ -21,7 +20,6 @@ Migrations.add({
     Flights.update({items: {$exists: true}}, {$unset: {items: ''}}, {multi: true});
   },
   down: function () {
-
   }
 });
 

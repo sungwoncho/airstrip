@@ -4,6 +4,6 @@ FlightTweetFactory = class FlightTweetFactory {
   }
 
   get build() {
-    return `✈✈✈ Flight # ${this.flight.number} has landed - http://airstrip.io/f/${this.flight.date} #digitalnomad`;
+    return `[Notice] Flight #${this.flight.number} has landed on time - http://airstrip.io/f/${this.flight.date}`;
   }
 };

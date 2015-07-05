@@ -13,9 +13,13 @@ Template.flight.helpers({
 
   sources: function () {
     var items = getItemsForFlight(this).fetch();
-    var sources = _.pluck(items, 'source');
+    var sources = _.pluck(items, 'sourceUrl');
     var uniqSources = _.uniq(sources);
     return uniqSources;
+  },
+
+  prettySource: function (source) {
+    return source.replace(/.*?:\/\//g, "");
   },
 
   items: function () {

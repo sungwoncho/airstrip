@@ -29,3 +29,4 @@ dburles:factory
 percolate:migrations
 coffeescript
 grigio:babel
+aldeed:autoform

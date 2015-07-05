@@ -1,12 +1,14 @@
 Template.item.helpers({
   sourceBadgeUrl: function () {
-    if (this.source === 'nomadlist.com' || this.source === 'nomadforum.io') {
-      return '/images/nomadlist-badge.png';
-    } else if (this.source === 'www.reddit.com') {
-      return '/images/reddit-badge.png';
-    } else {
-      return '/images/blog-badge.png';
+    var fileName = this.sourceName.toLowerCase().replace(/ -/g,"_");
+
+    if (_.contains(['nomadlist', 'nomadlist - story', 'nomadforum'], fileName)) {
+      return '/images/nomadlistBadge.png';
+    } else if (fileName === 'reddit') {
+      return '/images/redditBadge.png';
     }
+
+    return `/images/${this.sourceType}Badge.png`;
   },
 
   hostUrl: function () {

@@ -5,7 +5,7 @@ Router.onBeforeAction(function () {
     this.next();
   }
 },{
-  only: ['admin', 'adminFlight.show']
+  only: ['admin', 'adminFlight.show', 'adminFeeds', 'adminFeedEdit']
 });
 
 Router.route('/admin', {
@@ -25,5 +25,21 @@ Router.route('/admin/f/:date', {
   },
   waitOn: function () {
     return Meteor.subscribe('flight', this.params.date);
+  }
+});
+
+Router.route('/admin/feeds', {
+  waitOn: function () {
+    return Meteor.subscribe('feeds');
+  }
+});
+
+Router.route('/admin/feeds/:_id/edit', {
+  name: 'adminFeedEdit',
+  data: function () {
+    return Feeds.findOne();
+  },
+  waitOn: function () {
+    return Meteor.subscribe('feed', this.params._id);
   }
 });

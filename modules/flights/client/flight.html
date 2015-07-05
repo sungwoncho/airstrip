@@ -20,18 +20,19 @@
     <ul>
       {{#each sources}}
         <li>
-          <a href="http://{{this}}">{{this}}</a>
+          <a href="{{this}}" target="_blank">{{prettySource this}}</a>
         </li>
       {{/each}}
     </ul>
 
     <a class="twitter-share-button"
        href="https://twitter.com/share"
-       data-text="✈✈✈ Flight #{{number}} on @airstripio -"
-       data-url="https://airstrip.io{{pathFor route='flight.show'}}"
-       data-hashtags="digitalnomad"
+       data-text="#nomad flight #{{number}} ✈"
+       data-url="{{urlFor route='flight.show'}}"
+       data-via="airstripio"
        data-count="none">Tweet
     </a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </section>
 
   <section class="item-list">

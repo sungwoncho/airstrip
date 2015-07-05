@@ -10,8 +10,15 @@ var ItemSchema = new SimpleSchema({
   guid: {
     type: String
   },
-  source: {
+  sourceName: {
     type: String
+  },
+  sourceUrl: {
+    type: String
+  },
+  sourceType: {
+    type: String,
+    optional: true
   },
   author: {
     type: String,
@@ -44,9 +51,10 @@ Items.attachSchema(ItemSchema);
 // Factory to generate test fixture
 Factory.define('item', Items, {
   title: 'example title',
-  url: 'http://example.com',
-  guid: 'http://example.com',
-  source: 'example.com',
+  url: 'http://example.com/example_post',
+  guid: 'http://example.com/example_post',
+  sourceName: 'Example',
+  sourceUrl: 'http://www.example.com',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',
@@ -61,6 +69,7 @@ Meteor.methods({
     var flight = Flights.findOne({date: date});
     var newItemId = Items.insert(_.extend(item, {flightId: flight._id}));
     Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
+    console.log('created ' + item.title);
   },
 
   'toggleHidden': function (itemId) {
