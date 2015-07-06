@@ -1,0 +1,10 @@
+<h1>{{flight.title}}</h1>
+{{flight.date}}
+
+<ul>
+  {{#each items}}
+    <li>
+      <a href="{{urlFor route='item'}}">{{title}}</a>
+    </li>
+  {{/each}}
+</ul>
