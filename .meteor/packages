@@ -30,3 +30,4 @@ percolate:migrations
 coffeescript
 grigio:babel
 aldeed:autoform
+miro:mailchimp
