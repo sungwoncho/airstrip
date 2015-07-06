@@ -7,7 +7,7 @@ campaignFactory = {
     var today = moment().format('YYYY/MM/DD');
 
     SSR.compileTemplate('emailDigest', Assets.getText('newsletter/emailDigest.html'));
-    var html = SSR.render('emailDigest', {flight: flight, items: items});
+    var html = SSR.render('emailDigest', {flight: flight, items: items, logoUrl: Meteor.absoluteUrl('images/logo.png')});
     var inlinedHtml = juice(html);
 
     var campaign = {
