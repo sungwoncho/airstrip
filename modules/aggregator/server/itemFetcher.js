@@ -7,8 +7,10 @@ var itemLimitPerFlight = 10;
 ItemFetcher = {
   fetch: function () {
     // Create a flight if no flight exists for today
+    console.log('creating a flight for ' + today + '...');
     if (Flights.find({date: today}).count() === 0) {
       Meteor.call('createFlight', {date: today, itemIds: []});
+      console.log('flight created successfully.');
     }
 
     Feeds.find({}, {sort: {position: 1}}).forEach(function (feed) {
