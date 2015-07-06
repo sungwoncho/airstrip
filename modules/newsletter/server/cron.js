@@ -6,7 +6,7 @@ SyncedCron.add({
   job: function () {
     var latestFlight = Flights.findOne({}, {sort: {date: -1}, limit: 1});
 
-    var campaign = campaignBuilder.run(latestFlight);
-    newsletterScheduler.run(campaign);
+    var campaign = campaignFactory.build(latestFlight);
+    newsletterScheduler.schedule(campaign);
   }
 });

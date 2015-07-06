@@ -1,18 +1,17 @@
 newsletterScheduler = {
-  run: function (campaign) {
-    var mailChimpCampaign = _createCampaign(campaign);
+  schedule: function (campaign) {
+    var mailchimpCampaign = this.createCampaign(campaign);
 
     var scheduleOptions = {
-      cid: mailChimpCampaign.id,
+      cid: mailchimpCampaign.id,
       schedule_time: moment().add(1, 'hours').format('YYYY-MM-DD HH:mm:ss')
     };
 
     var schedule = this._mailchimpAPI.call('campaigns', 'schedule', scheduleOptions);
-
-    console.log('result: ' + schedule);
+    // console.log('result: ' + schedule);
   },
 
-  _createCampaign: function () {
+  createCampaign: function (campaign) {
     var campaignOptions = {
       type: 'regular',
       options: {
@@ -27,7 +26,9 @@ newsletterScheduler = {
       }
     };
 
-    this.mailchimpAPI.call('campaigns', 'create', newsletterOptions);
+    var newCampaign = this._mailchimpAPI.call('campaigns', 'create', campaignOptions);
+
+    return newCampaign;
   },
 
   _mailchimpAPI: function () {

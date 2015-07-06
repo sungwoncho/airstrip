@@ -1,0 +1,99 @@
+<style type="text/css">
+  @import url('http://fonts.googleapis.com/css?family=Open+Sans');
+
+  a {
+    color: #fff;
+  }
+
+  .item-links {
+    color: #000;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    margin-top: 0;
+  }
+
+  .email-digest {
+    background-color: #E4E4E4;
+    font-family:'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+    overflow: auto;
+  }
+
+  .content {
+    margin-right: auto;
+    margin-left: auto;
+    width: 650px;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+
+  .header {
+    text-align: center;
+    background-color: #3CC06F;
+    color: #FFF;
+    padding: 20px 0;
+  }
+
+  .footer {
+    text-align: center;
+    background-color: #5F5F5F;
+    color: #FFF;
+    padding: 30px;
+  }
+
+  .item {
+    border-top: 1px solid #DDD;
+    padding: 20px 0;
+  }
+
+  .item:first-child {
+    border-top: none;
+  }
+
+  .item-info {
+    color: #ddd;
+  }
+
+  .item-info a {
+    color: #ADADAD;
+    border-bottom: 1px dotted;
+    text-decoration: none;
+  }
+</style>
+
+<div class="email-digest">
+  <div class="content">
+    <div class="header">
+      <h1>Today on airstrip</h1>
+      {{formatDate flight.date}} -
+      <a target="_blank" class="flight-number" href="{{urlFor route='flight.show' data=flight}}">
+        Flight #{{flight.number}}
+      </a>
+    </div>
+
+    <ul>
+      {{#each items}}
+        <li class='item'>
+          <h2>
+            <a target="_blank" href="{{url}}" class="item-links">{{title}}</a>
+          </h2>
+
+          <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
+        </li>
+      {{/each}}
+    </ul>
+
+    <div class="footer">
+      <p>
+        We tweet stories and more on <a target="_blank" href="https://twitter.com/airstripio">@airstripio</a>.
+      </p>
+    </div>
+  </div>
+</div>
