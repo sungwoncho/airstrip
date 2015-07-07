@@ -23,7 +23,6 @@ meteorhacks:npm
 npm-container
 velocity:html-reporter
 mike:mocha
-practicalmeteor:sinon
 aldeed:collection2
 dburles:factory
 percolate:migrations
@@ -32,3 +31,4 @@ grigio:babel
 aldeed:autoform
 miro:mailchimp
 meteorhacks:ssr
+practicalmeteor:sinon

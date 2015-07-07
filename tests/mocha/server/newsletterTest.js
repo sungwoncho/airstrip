@@ -6,6 +6,10 @@ MochaWeb.testOnly(function(){
     Items.remove({});
   });
 
+  afterEach(function () {
+    stubs.restoreAll();
+  });
+
   describe("campaignFactory.build", function(){
     it("builds and returns campaign with correct attributes", function(){
       var flight = Factory.create('flight');
@@ -28,38 +32,45 @@ MochaWeb.testOnly(function(){
   describe("newsletterScheduler", function(){
     describe("schedule", function(){
       it("schedules newsletter", function(){
-        var mock = sinon.mock(newsletterScheduler._mailchimpAPI);
-        mock.expects('call').withArgs('campaigns', 'schedule');
-
+        // Setup
         stubs.create('createCampaign', newsletterScheduler, 'createCampaign');
         stubs.createCampaign.returns({id: 1});
 
-        var flight = Factory.create('flight');
-        Factory.create('item', {flightId: flight._id, title: 'example1'});
-        Factory.create('item', {flightId: flight._id, title: 'example2'});
-        Factory.create('item', {flightId: flight._id, title: 'example3'});
-        var campaign = campaignFactory.build(flight);
+        var mailchimpCall = sinon.spy();
+        stubs.create('mailchimpAPI', newsletterScheduler, 'mailchimpAPI');
+        stubs.mailchimpAPI.returns({call: mailchimpCall});
 
+        // Execute
+        var campaign;
         newsletterScheduler.schedule(campaign);
 
-        mock.verify();
+        // Verify
+        expect(mailchimpCall).to.have.been.calledWith('campaigns', 'schedule');
+
+        // Teardown
+        stubs.restoreAll();
       });
     });
 
     describe("createCampaign", function(){
       it("creates a campaign", function(){
-        var mock = sinon.mock(newsletterScheduler._mailchimpAPI);
-        mock.expects('call').withArgs('campaigns', 'create');
-
+        // Setup
         var flight = Factory.create('flight');
-        Factory.create('item', {flightId: flight._id, title: 'example1'});
-        Factory.create('item', {flightId: flight._id, title: 'example2'});
-        Factory.create('item', {flightId: flight._id, title: 'example3'});
+        Factory.create('item', {flightId: flight._id});
         var campaign = campaignFactory.build(flight);
 
+        var mailchimpCall = sinon.spy();
+        stubs.create('mailchimpAPI', newsletterScheduler, 'mailchimpAPI');
+        stubs.mailchimpAPI.returns({call: mailchimpCall});
+
+        // Execute
         newsletterScheduler.createCampaign(campaign);
 
-        mock.verify();
+        // Verify
+        expect(mailchimpCall).to.have.been.calledWith('campaigns', 'create');
+
+        // Teardown
+        stubs.restoreAll();
       });
     });
   });
