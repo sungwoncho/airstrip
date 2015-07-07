@@ -41,7 +41,7 @@ newsletterScheduler = {
     });
 
     if (newCampaign.error) {
-      console.log('Could not create campaign: ' + err);
+      throw new Error('Could not create the campaign: ' + newCampaign.error);
     } else {
       console.log('Created the campaign');
       return newCampaign.result;

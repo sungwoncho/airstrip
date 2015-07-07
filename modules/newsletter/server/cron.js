@@ -4,6 +4,6 @@ SyncedCron.add({
     return parser.text('at 10:00 am');
   },
   job: function () {
-    Meteor.call('scheduleDailyDiegst');
+    Meteor.call('scheduleDailyDigest');
   }
 });
