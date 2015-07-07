@@ -1,10 +1,11 @@
 newsletterScheduler = {
   schedule: function (campaign) {
     var mailchimpCampaign = this.createCampaign(campaign);
+    var scheduledTime = moment().utcOffset(0).add(1, 'hours').format('YYYY-MM-DD HH:mm:ss');
 
     var scheduleOptions = {
       cid: mailchimpCampaign.id,
-      schedule_time: moment().add(1, 'hours').format('YYYY-MM-DD HH:mm:ss')
+      schedule_time: scheduledTime
     };
 
     console.log('Scheduling campaign...');
@@ -12,7 +13,7 @@ newsletterScheduler = {
       if (err) {
         console.log('Error while scheduling campaign : ' + err);
       } else {
-        console.log('Successfully scheduled the campaign');
+        console.log('Successfully scheduled the campaign at ' + scheduledTime);
       }
     });
   },
