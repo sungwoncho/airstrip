@@ -12,7 +12,7 @@ newsletterScheduler = {
       if (err) {
         console.log('Error while scheduling campaign : ' + err);
       } else {
-        console.log('Successfully scheduled the campaign: ' + res);
+        console.log('Successfully scheduled the campaign');
       }
     });
   },
@@ -33,16 +33,18 @@ newsletterScheduler = {
     };
 
     console.log('Creating campaign...');
-    var newCampaign = this.mailchimpAPI().call('campaigns', 'create', campaignOptions, function (err, res) {
-      if (err) {
-        console.error('Error while scheduling campaign : ' + err);
-      } else {
-        console.log('Created the campaign');
-        console.log(res);
-      }
+    var newCampaign = Async.runSync(function (done) {
+      newsletterScheduler.mailchimpAPI().call('campaigns', 'create', campaignOptions, function (err, res) {
+        done(err, res);
+      });
     });
 
-    return newCampaign;
+    if (newCampaign.error) {
+      console.log('Could not create campaign: ' + err);
+    } else {
+      console.log('Created the campaign');
+      return newCampaign.result;
+    }
   },
 
   mailchimpAPI: function () {

@@ -59,7 +59,11 @@ MochaWeb.testOnly(function(){
         Factory.create('item', {flightId: flight._id});
         var campaign = campaignFactory.build(flight);
 
-        var mailchimpCall = sinon.spy();
+        // Hack to resolve Async.runSync
+        var mailchimpCall = sinon.spy(function (done) {
+          done();
+        });
+
         stubs.create('mailchimpAPI', newsletterScheduler, 'mailchimpAPI');
         stubs.mailchimpAPI.returns({call: mailchimpCall});
 
