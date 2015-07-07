@@ -23,19 +23,12 @@
     margin-top: 0;
   }
 
-  .email-digest {
-    background-color: #E4E4E4;
-    font-family:'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
-    overflow: auto;
+  .wrapper {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
   }
 
   .content {
-    margin-right: auto;
-    margin-left: auto;
-    width: 650px;
-    background-color: white;
-    margin-top: 10px;
-    margin-bottom: 50px;
+    margin: 20px 0 30px;
   }
 
   .header {
@@ -81,42 +74,55 @@
   }
 </style>
 
-<div class="email-digest">
-  <div class="content">
-    <div class="header">
-      <div class="logo">
-        <a href="{{urlFor route='home'}}">
-          <img src="{{logoUrl}}" alt="logo">
-        </a>
-      </div>
+<table class="wrapper" border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#e4e4e4">
+  <tr>
+    <td align="center" valign="top" bgcolor="#e4e4e4">
 
-      <h1>Today on airstrip</h1>
-      {{formatDate flight.date}} -
-      <a target="_blank" class="flight-number" href="{{urlFor route='flight.show' data=flight}}">
-        Flight #{{flight.number}}
-      </a>
-    </div>
+      <table border="0" width="600" cellpadding="0" cellspacing="0" class="content" bgcolor="#ffffff">
+        <tr>
+          <td class="header">
+            <div class="logo">
+              <a href="{{urlFor route='home'}}">
+                <img src="{{logoUrl}}" alt="logo">
+              </a>
+            </div>
 
-    <ul>
-      {{#each items}}
-        <li class='item'>
-          <h2>
-            <a target="_blank" href="{{url}}" class="item-links">{{title}}</a>
-          </h2>
+            <h1>Today on airstrip</h1>
+            {{formatDate flight.date}} -
+            <a target="_blank" class="flight-number" href="{{urlFor route='flight.show' data=flight}}">
+              Flight #{{flight.number}}
+            </a>
+          </td>
+        </tr>
 
-          <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
-        </li>
-      {{/each}}
-    </ul>
+        <tr>
+          <td class="item-list">
+            <ul>
+              {{#each items}}
+                <li class='item'>
+                  <h2>
+                    <a target="_blank" href="{{url}}" class="item-links">{{title}}</a>
+                  </h2>
 
-    <div class="footer">
-      <p>
-        We tweet stories and more on <a target="_blank" href="https://twitter.com/airstripio">@airstripio</a>.
-      </p>
+                  <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
+                </li>
+              {{/each}}
+            </ul>
+          </td>
+        </tr>
 
-      <p class="communication-cta">
-        Reply to this email or tweet us.
-      </p>
-    </div>
-  </div>
-</div>
+        <tr>
+          <td class="footer">
+            <p>
+              We tweet stories and more on <a target="_blank" href="https://twitter.com/airstripio">@airstripio</a>.
+            </p>
+
+            <p class="communication-cta">
+              Reply to this email or tweet us.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
