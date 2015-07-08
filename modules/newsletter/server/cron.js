@@ -1,9 +1,9 @@
 SyncedCron.add({
-  name: 'Schedule a daily digest',
+  name: 'Schedule a weekly digest',
   schedule: function (parser) {
-    return parser.text('at 10:00 am');
+    return parser.text('at 7:00 am on Sat');
   },
   job: function () {
-    Meteor.call('scheduleDailyDigest');
+    Meteor.call('scheduleWeeklyDigest');
   }
 });
