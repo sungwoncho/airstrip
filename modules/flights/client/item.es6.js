@@ -12,7 +12,7 @@ Template.item.helpers({
   },
 
   shortUrl: function () {
-    return Meteor.absoluteUrl(`i/${this.shortLink}`);
+    return Utils.buildShortUrl(this);
   }
 });
 
