@@ -20,6 +20,7 @@ MochaWeb.testOnly(function () {
       var flight = Flights.findOne();
       var item = Items.findOne();
       expect(item.flightId).to.equal(flight._id);
+      expect(item.shortLink).to.exist;
       expect(flight.itemIds[0]).to.equal(item._id);
     });
 

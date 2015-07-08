@@ -34,4 +34,18 @@ Migrations.add({
   }
 });
 
+Migrations.add({
+  version: 4,
+  name: "Add shortLink field to items",
+  up: function () {
+    Items.find({shortLink: {$exists: false}}).forEach(function (item) {
+      Items.update(item._id, {$set: {shortLink: shortLinkFactory.build()}});
+    });
+  },
+
+  down: function () {
+    Items.update({shortLink: {$exists: true}}, {$unset: {shortLink: ''}});
+  }
+});
+
 Migrations.migrateTo('latest');

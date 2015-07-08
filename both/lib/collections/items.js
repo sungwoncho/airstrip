@@ -40,6 +40,9 @@ var ItemSchema = new SimpleSchema({
     type: Boolean,
     defaultValue: false
   },
+  shortLink: {
+    type: String
+  },
   createdAt: {
     type: Date,
     denyUpdate: true
@@ -58,6 +61,7 @@ Factory.define('item', Items, {
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',
+  shortLink: Math.random().toString(36).substring(12),
   createdAt: new Date(2015, 6, 30)
 });
 
@@ -67,7 +71,8 @@ Meteor.methods({
     if (Items.find({'guid': item.guid}).count() > 0) return null;
 
     var flight = Flights.findOne({date: date});
-    var newItemId = Items.insert(_.extend(item, {flightId: flight._id}));
+    var shortLink = shortLinkFactory.build();
+    var newItemId = Items.insert(_.extend(item, {flightId: flight._id, shortLink: shortLink}));
     Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
     console.log('created ' + item.title);
   },
