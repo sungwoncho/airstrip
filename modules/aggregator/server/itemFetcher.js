@@ -1,7 +1,7 @@
 var FeedParser = Meteor.npmRequire('feedparser');
 var Readable = Meteor.npmRequire('stream').Readable;
 
-var today = moment().format('YYYYMMDD');
+var today = moment().utcOffset(0).format('YYYYMMDD');
 var itemLimitPerFlight = 10;
 
 ItemFetcher = {
