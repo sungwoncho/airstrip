@@ -6,3 +6,7 @@ Template.registerHelper('formatDate', function (date) {
   var day = date.substring(6,8);
   return moment(year + '-' + month + '-' + day).format('MMMM D, YYYY');
 });
+
+Template.registerHelper('shortUrl', function (item) {
+  return Utils.buildShortUrl(item);
+});

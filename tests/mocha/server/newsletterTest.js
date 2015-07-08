@@ -10,14 +10,14 @@ MochaWeb.testOnly(function(){
     stubs.restoreAll();
   });
 
-  describe("campaignFactory.build", function(){
+  describe("campaignFactory.buildDaily", function(){
     it("builds and returns campaign with correct attributes", function(){
       var flight = Factory.create('flight');
       Factory.create('item', {flightId: flight._id, title: 'example1'});
       Factory.create('item', {flightId: flight._id, title: 'example2'});
       Factory.create('item', {flightId: flight._id, title: 'example3'});
 
-      var result = campaignFactory.build(flight);
+      var result = campaignFactory.buildDaily(flight);
 
       expect(result.html).to.include('example1');
       expect(result.html).to.include('example2');
@@ -57,7 +57,7 @@ MochaWeb.testOnly(function(){
     //     // Setup
     //     var flight = Factory.create('flight');
     //     Factory.create('item', {flightId: flight._id});
-    //     var campaign = campaignFactory.build(flight);
+    //     var campaign = campaignFactory.buildDaily(flight);
     //
     //     // Hack to resolve Async.runSync
     //     var mailchimpCall = sinon.spy(function (done) {
@@ -77,5 +77,39 @@ MochaWeb.testOnly(function(){
     //     stubs.restoreAll();
     //   });
     // });
+  });
+
+  describe("weeklyItemPicker", function(){
+    describe("pickReddit", function(){
+      it("returns the Reddit items of the past week in the order of viewCount", function(){
+        // Setup
+        var flight1 = Factory.create('flight', {date: moment().subtract(3, 'days').format('YYYYMMDD')});
+        var flight2 = Factory.create('flight', {date: moment().subtract(4, 'days').format('YYYYMMDD')});
+        var flight3 = Factory.create('flight', {date: moment().subtract(5, 'days').format('YYYYMMDD')});
+
+        var item1 = Factory.create('item', {title: 'item1', flightId: flight1._id, sourceName: 'Reddit'});
+        var item2 = Factory.create('item', {title: 'item2', flightId: flight2._id, sourceName: 'Reddit'});
+        var item3 = Factory.create('item', {title: 'item3', flightId: flight3._id, sourceName: 'Reddit'});
+        Factory.create('item', {title: 'item3', flightId: flight3._id, sourceName: 'RandomSource'});
+
+        Factory.create('viewStat', {itemId: item1._id, viewCount: 10});
+        Factory.create('viewStat', {itemId: item2._id, viewCount: 5});
+        Factory.create('viewStat', {itemId: item3._id, viewCount: 15});
+
+        // Execute
+        var result = weeklyItemPicker.pickReddit();
+
+        // Verify
+        expect(result.length).to.equal(3);
+        expect(result[0]._id).to.equal(item3._id);
+        expect(result[1]._id).to.equal(item1._id);
+        expect(result[2]._id).to.equal(item2._id);
+
+        // Teardown
+        Flights.remove();
+        Items.remove();
+        ViewStats.remove();
+      });
+    });
   });
 });

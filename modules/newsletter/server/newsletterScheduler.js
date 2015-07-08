@@ -57,7 +57,7 @@ Meteor.methods({
   scheduleDailyDigest: function () {
     var latestFlight = Flights.findOne({}, {sort: {date: -1}, limit: 1});
 
-    var campaign = campaignFactory.build(latestFlight);
+    var campaign = campaignFactory.buildWeekly();
     newsletterScheduler.schedule(campaign);
   }
 });

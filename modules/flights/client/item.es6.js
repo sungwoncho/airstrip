@@ -9,10 +9,6 @@ Template.item.helpers({
     }
 
     return `/images/${this.sourceType}Badge.png`;
-  },
-
-  shortUrl: function () {
-    return Utils.buildShortUrl(this);
   }
 });
 
