@@ -42,9 +42,23 @@ Migrations.add({
       Items.update(item._id, {$set: {shortLink: shortLinkFactory.build()}});
     });
   },
-
   down: function () {
     Items.update({shortLink: {$exists: true}}, {$unset: {shortLink: ''}});
+  }
+});
+
+Migrations.add({
+  version: 5,
+  name: "Create viewStat record for items",
+  up: function () {
+    Items.find().forEach(function (item) {
+      if (!!!ViewStats.findOne({itemId: item._id})) {
+        ViewStats.insert({itemId: item._id, viewCount: 0, createdAt: new Date()});
+      }
+    });
+  },
+  down: function () {
+    ViewStats.remove({});
   }
 });
 

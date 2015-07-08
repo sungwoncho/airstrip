@@ -73,7 +73,13 @@ Meteor.methods({
     var flight = Flights.findOne({date: date});
     var shortLink = shortLinkFactory.build();
     var newItemId = Items.insert(_.extend(item, {flightId: flight._id, shortLink: shortLink}));
+
+    // Add the id of new item to itemIds
     Flights.update({date: date}, {$addToSet: {itemIds: newItemId}});
+
+    // Create viewStat for the item
+    ViewStats.insert({itemId: newItemId});
+
     console.log('created ' + item.title);
   },
 

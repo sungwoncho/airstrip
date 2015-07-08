@@ -1,4 +1,4 @@
-ViewStats = new Mongo.Collection('viewStats');
+ViewStats = new Mongo.Collection('viewstats');
 
 var viewStatSchema = new SimpleSchema({
   itemId: {
@@ -9,11 +9,13 @@ var viewStatSchema = new SimpleSchema({
     defaultValue: 0
   },
   viewedIPs: {
-    type: [String]
+    type: [String],
+    defaultValue: []
   },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
+    defaultValue: new Date()
   }
 });
 
