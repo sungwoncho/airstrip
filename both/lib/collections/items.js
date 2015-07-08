@@ -45,7 +45,8 @@ var ItemSchema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
+    defaultValue: new Date()
   }
 });
 

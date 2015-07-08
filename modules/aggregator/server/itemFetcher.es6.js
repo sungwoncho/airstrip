@@ -46,13 +46,18 @@ var handleFeed = function (rawContent, feed) {
         flight = Flights.findOne({date: today});
 
     while (item = stream.read()) {
+      if (item.pubdate && Date.parse(item.pubdate) < moment().utcOffset(0).subtract(7, 'days')) {
+        console.log(`Rejecting item that is too old: \"${item.title}\" from ${feed.sourceName}`);
+        return;
+      }
+
       if (Items.find({flightId: flight._id, sourceName: feed.sourceName}).count() >= feed.dailyItemLimit) {
-        console.log('daily item limit reached for ' + feed.sourceName);
+        console.log(`Daily item limit reached for ${feed.sourceName}`);
         return;
       }
 
       if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
-        console.log('item limit reached.');
+        console.log(`Item limit per flight of ${itemLimitPerFlight} reached.`);
         return;
       }
 
@@ -63,8 +68,7 @@ var handleFeed = function (rawContent, feed) {
         sourceName: feed.sourceName,
         sourceUrl: feed.sourceUrl,
         sourceType: feed.sourceType,
-        author: item.author,
-        createdAt: new Date()
+        author: item.author
       };
 
       Meteor.call('createItem', newItem, today);
