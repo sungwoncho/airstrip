@@ -1,4 +1,6 @@
 {
   "twitterConsumerSecret": "someRandomString1",
-  "twitterAccessTokenSecret": "someRandomString2"
+  "twitterAccessTokenSecret": "someRandomString2",
+  "mailchimpAPIKey": "someRandomString3",
+  "mailchimpListId": "someRandomString4"
 }

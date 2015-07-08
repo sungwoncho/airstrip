@@ -20,7 +20,20 @@ MochaWeb.testOnly(function () {
       var flight = Flights.findOne();
       var item = Items.findOne();
       expect(item.flightId).to.equal(flight._id);
+      expect(item.shortLink).to.exist;
       expect(flight.itemIds[0]).to.equal(item._id);
+    });
+
+    it("creates a viewStat", function(){
+      // Setup
+      Factory.create('flight', {date: '20150630'});
+      var newItem = Factory.build('item');
+
+      // Execute
+      Meteor.call('createItem', newItem, '20150630');
+
+      // Verify
+      expect(ViewStats.find({itemId: newItem._id}).count()).to.equal(1);
     });
 
     it("does not create item if duplicate exists", function(){

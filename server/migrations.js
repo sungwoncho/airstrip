@@ -34,4 +34,32 @@ Migrations.add({
   }
 });
 
+Migrations.add({
+  version: 4,
+  name: "Add shortLink field to items",
+  up: function () {
+    Items.find({shortLink: {$exists: false}}).forEach(function (item) {
+      Items.update(item._id, {$set: {shortLink: shortLinkFactory.build()}});
+    });
+  },
+  down: function () {
+    Items.update({shortLink: {$exists: true}}, {$unset: {shortLink: ''}});
+  }
+});
+
+Migrations.add({
+  version: 5,
+  name: "Create viewStat record for items",
+  up: function () {
+    Items.find().forEach(function (item) {
+      if (!!!ViewStats.findOne({itemId: item._id})) {
+        ViewStats.insert({itemId: item._id, viewCount: 0, createdAt: new Date()});
+      }
+    });
+  },
+  down: function () {
+    ViewStats.remove({});
+  }
+});
+
 Migrations.migrateTo('latest');

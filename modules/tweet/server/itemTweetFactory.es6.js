@@ -42,7 +42,7 @@ var _getTitle = function (item) {
 };
 
 var _getUrl = function (item) {
-  return item.url;
+  return Utils.buildShortUrl(item);
 };
 
 var _getDescription = function () {

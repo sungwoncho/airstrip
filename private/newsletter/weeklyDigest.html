@@ -1,0 +1,190 @@
+<style type="text/css">
+  @import url('http://fonts.googleapis.com/css?family=Open+Sans');
+
+  a {
+    color: #fff;
+  }
+
+  .item-links {
+    color: #000;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    padding-right: 40px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    margin-top: 0;
+  }
+
+  .wrapper {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+  }
+
+  .content {
+    margin: 20px 0 30px;
+  }
+
+  .header {
+    text-align: center;
+    background-color: #3CC06F;
+    color: #FFF;
+    padding: 30px 0;
+  }
+
+  .footer {
+    text-align: center;
+    background-color: #5F5F5F;
+    color: #FFF;
+    padding: 30px;
+  }
+
+  .item {
+    border-top: 1px solid #DDD;
+    padding: 20px 0;
+  }
+
+  .item:first-child {
+    border-top: none;
+  }
+
+  .item-info {
+    color: #BABABA;
+  }
+
+  .item-info a {
+    color: #999;
+    border-bottom: 1px dotted;
+    text-decoration: none;
+  }
+
+  .logo img {
+    width: 80px;
+  }
+
+  .category-logo {
+    text-align: center;
+  }
+
+  .category-logo img {
+    width: 50px;
+  }
+
+  .communication-cta {
+    font-size: 80%;
+    color: #ddd;
+  }
+
+  .category {
+    text-align: center;
+  }
+
+  .item-list {
+    padding-top: 30px;
+  }
+
+  .date {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+</style>
+
+<table class="wrapper" border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#e4e4e4">
+  <tr>
+    <td align="center" valign="top" bgcolor="#e4e4e4">
+
+      <table border="0" width="600" cellpadding="0" cellspacing="0" class="content" bgcolor="#ffffff">
+        <tr>
+          <td class="header">
+            <div class="logo">
+              <a href="{{urlFor route='home'}}">
+                <img src="{{logoUrl}}" alt="logo">
+              </a>
+            </div>
+
+            <h1>This week on airstrip</h1>
+            <div>
+              What's been trending in nomad world?
+            </div>
+
+            <div class="date">
+              ({{startDate}}~{{endDate}})
+            </div>
+
+          </td>
+        </tr>
+
+        <tr>
+          <td class="item-list">
+            <h1 class="category">Reddit</h1>
+            <div class="category-logo">
+              <img src="{{redditLogoUrl}}" alt="reddit">
+            </div>
+            <ul>
+              {{#each redditItems}}
+                <li class='item'>
+                  <h2>
+                    <a target="_blank" href="{{shortUrl this}}" class="item-links">{{title}}</a>
+                  </h2>
+
+                  <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
+                </li>
+              {{/each}}
+            </ul>
+
+            <h1 class="category">Nomadforum</h1>
+            <div class="category-logo">
+              <img src="{{nomadForumLogoUrl}}" alt="reddit">
+            </div>
+            <ul>
+              {{#each nomadForumItems}}
+                <li class='item'>
+                  <h2>
+                    <a target="_blank" href="{{shortUrl this}}" class="item-links">{{title}}</a>
+                  </h2>
+
+                  <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
+                </li>
+              {{/each}}
+            </ul>
+
+            <h1 class="category">Blog</h1>
+            <div class="category-logo">
+              <img src="{{blogLogoUrl}}" alt="reddit">
+            </div>
+            <ul>
+              {{#each blogItems}}
+                <li class='item'>
+                  <h2>
+                    <a target="_blank" href="{{shortUrl this}}" class="item-links">{{title}}</a>
+                  </h2>
+
+                  <span class="item-info">on <a target="_blank" href="{{sourceUrl}}">{{sourceName}}</a></span>
+                </li>
+              {{/each}}
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="footer">
+            <p>
+              We tweet stories and more on <a target="_blank" href="https://twitter.com/airstripio">@airstripio</a>.
+            </p>
+
+            <p class="communication-cta">
+              Reply to this email or tweet us.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
