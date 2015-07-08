@@ -11,11 +11,8 @@ Template.item.helpers({
     return `/images/${this.sourceType}Badge.png`;
   },
 
-  hostUrl: function () {
-    var fullUrl = document.createElement('a');
-    fullUrl.href = this.url;
-
-    return fullUrl.hostname;
+  shortUrl: function () {
+    return Meteor.absoluteUrl(`i/${this.shortLink}`);
   }
 });
 
