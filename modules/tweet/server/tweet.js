@@ -13,8 +13,7 @@ Tweet = {
 
   postForItem: function (item) {
     var flightNumber = Flights.findOne(item.flightId).number;
-    var itemTweetFactory = new ItemTweetFactory(item);
-    var tweetMessage = itemTweetFactory.build;
+    var tweetMessage = itemTweetFactory.build(item);
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
       if (err) console.log(err);

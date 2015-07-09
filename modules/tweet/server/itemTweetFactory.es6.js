@@ -1,55 +1,72 @@
-ItemTweetFactory = class ItemTweetFactory {
+itemTweetFactory = class itemTweetFactory {
   constructor(item) {
     this.item = item;
-    this.opening = _getOpening();
-    this.itemTitle = _getTitle(item);
-    this.flightNumber = _getFlightNumber(item);
-    this.url = _getUrl(item);
-    this.description = _getDescription();
   }
 
-  get build() {
+  static build(item) {
+    var obj = new itemTweetFactory(item); // instantiate an itemTweetFactory object
+
+    var trim = 0,
+        status = obj._getStatus(trim);
+
+    while (status.length > 140) {
+      trim++;
+      status = obj._getStatus(trim);
+    }
+
+    return status;
+  }
+
+  _getStatus(trim = 0) {
+    var obj = new itemTweetFactory(this.item);
+
     return _.sample([
-      `${this.opening} ${this.itemTitle} ${this.flightNumber} ${this.url}`,
-      `${this.itemTitle} ${this.description} ${this.url}`
+      `${obj._getOpening()} ${obj._getTitle(trim)} ${obj._getFlightNumber()} ${obj._getUrl()}`,
+      `${obj._getTitle(trim)} ${obj._getDescription()} ${obj._getUrl()}`
     ]);
   }
-};
 
-var _getOpening = function (item) {
-  return _.sample([
-    "Check out:",
-    "Have you read this?",
-    "Recent item:",
-    "Check this out:",
-    "Here you go:",
-    "Recommended:"
-  ]);
-};
+  _getTitle(trim = 0) {
+    var title = this.item.title;
+    var trimmedTitle = title.slice(0, title.length - trim);
 
-var _getFlightNumber = function (item) {
-  var flightNumber = Flights.findOne(item.flightId).number;
+    return `"${trimmedTitle}"`;
+  }
 
-  return _.sample([
-    `on flight #${flightNumber}`,
-    `is on flight #${flightNumber}`,
-    `✈✈${flightNumber}`
-  ]);
-};
+  _getOpening() {
+    var possibleOpening = [
+      "Check out:",
+      "Have you read this?",
+      "Recent item:",
+      "Check this out:",
+      "Here you go:",
+      "New:",
+      "Dear paseengers:"
+    ];
 
-var _getTitle = function (item) {
-  return `"${item.title}"`;
-};
+    return _.sample(possibleOpening);
+  }
 
-var _getUrl = function (item) {
-  return Utils.buildShortUrl(item);
-};
+  _getFlightNumber() {
+    var flightNumber = Flights.findOne(this.item.flightId).number;
 
-var _getDescription = function () {
-  return _.sample([
-    "is trending.",
-    "is a good read.",
-    "Read it at:",
-    "Here is the link!"
-  ]);
+    return _.sample([
+      `on flight #${flightNumber}`,
+      `is on flight #${flightNumber}`,
+      `✈✈${flightNumber}`
+    ]);
+  }
+
+  _getUrl() {
+    return Utils.buildShortUrl(item);
+  }
+
+  _getDescription() {
+    return _.sample([
+      "is new.",
+      "is a good read.",
+      "Read it at:",
+      "Here is the link!"
+    ]);
+  }
 };

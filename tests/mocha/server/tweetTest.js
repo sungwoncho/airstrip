@@ -45,14 +45,15 @@ MochaWeb.testOnly(function(){
     });
   });
 
-  describe("ItemTweetFactory", function(){
+  describe("itemTweetFactory", function(){
     describe("build", function(){
       it("returns a string", function(){
         var flight = Factory.create('flight');
         var item = Factory.build('item', {flightId: flight._id});
-        var itemTweetFactory = new ItemTweetFactory(item);
 
-        expect(itemTweetFactory.build).to.be.a('string');
+        expect(itemTweetFactory.build(item)).to.be.a('string');
+
+        console.log(itemTweetFactory.build(item));
       });
     });
   });
