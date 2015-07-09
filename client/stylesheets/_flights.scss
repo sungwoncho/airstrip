@@ -24,14 +24,24 @@
     border-bottom: 1px solid $gray;
   }
 
-  li {
-    display: inline-block;
-    padding-right: 1.5em;
-  }
-
   @include media($mobile) {
     @include span-columns(12 of 12);
     @include shift(0);
+  }
+}
+
+.secondary-info {
+  color: $dark-gray;
+  @include outer-container;
+
+  li {
+    display: inline-block;
+    padding-right: 0.8em;
+
+    @include media($mobile) {
+      @include span-columns(4 of 4);
+      text-align: center;
+    }
   }
 }
 
@@ -71,10 +81,6 @@
       font-size: 1.2em;
     }
   }
-}
-
-.secondary-info {
-  color: #2C3E50;
 }
 
 .recent-flights {

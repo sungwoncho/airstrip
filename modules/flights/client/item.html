@@ -12,8 +12,19 @@
       </h2>
 
       <ul class="secondary-info">
-        <li>{{author}}</li>
-        <li><a href="{{sourceUrl}}">{{sourceName}}</a></li>
+        {{#if author}}
+          <li>
+            By {{author}}
+          </li>
+        {{/if}}
+
+        <li>
+          <a href="{{sourceUrl}}">{{sourceName}}</a>
+        </li>
+
+        <li>
+          {{pubDate}}
+        </li>
       </ul>
     </div>
   </article>
