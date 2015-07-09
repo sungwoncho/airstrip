@@ -59,6 +59,7 @@ Factory.define('item', Items, {
   guid: 'http://example.com/example_post',
   sourceName: 'Example',
   sourceUrl: 'http://www.example.com',
+  sourceType: 'blog',
   author: 'jon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',
