@@ -1,125 +1,119 @@
-itemTweetFactory = class itemTweetFactory {
-  constructor(item) {
-    this.item = item;
-  }
-
-  static build(item) {
-    var obj = new itemTweetFactory(item); // instantiate an itemTweetFactory object
-
+itemTweetFactory = {
+  build: function (item) {
     var trim = 0,
-        status = obj._getStatus(trim);
+        status = getStatus(item, trim);
 
     while (status.length > 140) {
       trim++;
-      status = obj._getStatus(trim);
+      status = getStatus(item, trim);
     }
 
     return status;
   }
+};
 
-  _getStatus(trim = 0) {
-    var obj = new itemTweetFactory(this.item);
+getStatus = function (item, trim = 0) {
+  return _.sample([
+    `${getOpening(item)} ${getTitle(item, trim)} ${getFlightNumber(item)} ${getUrl(item)}`,
+    `${getTitle(item, trim)} ${getDescription(item)} ${getUrl(item)}`
+  ]);
+};
 
-    return _.sample([
-      `${obj._getOpening()} ${obj._getTitle(trim)} ${obj._getFlightNumber()} ${obj._getUrl()}`,
-      `${obj._getTitle(trim)} ${obj._getDescription()} ${obj._getUrl()}`
-    ]);
+
+getTitle = function (item, trim = 0) {
+  var title = item.title;
+  var trimmedTitle = title.slice(0, title.length - trim);
+
+  return `"${trimmedTitle}"`;
+};
+
+getOpening = function (item) {
+  var possibleOpening = [
+    "Check out:",
+    "Have you read this?",
+    "Recent item:",
+    "New:",
+    "Dear paseengers:"
+  ];
+
+  if (item.sourceName === 'Reddit') {
+    possibleOpening.push(
+      "Recently on Reddit:",
+      "New on Reddit:",
+      "Reddit:",
+      "New item on /r/digitalnomad",
+      "On Reddit:"
+    );
   }
 
-  _getTitle(trim = 0) {
-    var title = this.item.title;
-    var trimmedTitle = title.slice(0, title.length - trim);
-
-    return `"${trimmedTitle}"`;
+  if (item.sourceName === 'NomadForum') {
+    possibleOpening.push(
+      "Recently on nomadforum:",
+      "Check out this thread on nomadforum.",
+      "On nomadforum:",
+      "New post on nomadforum",
+      "New on nomadforum"
+    );
   }
 
-  _getOpening() {
-    var possibleOpening = [
-      "Check out:",
-      "Have you read this?",
-      "Recent item:",
-      "New:",
-      "Dear paseengers:"
-    ];
-
-    if (this.item.sourceName === 'Reddit') {
-      possibleOpening.push(
-        "Recently on Reddit:",
-        "New on Reddit:",
-        "Reddit:",
-        "New item on /r/digitalnomad",
-        "On Reddit:"
-      );
-    }
-
-    if (this.item.sourceName === 'NomadForum') {
-      possibleOpening.push(
-        "Recently on nomadforum:",
-        "Check out this thread on nomadforum.",
-        "On nomadforum:",
-        "New post on nomadforum",
-        "New on nomadforum"
-      );
-    }
-
-    if (this.item.sourceType === 'blog') {
-      possibleOpening.push(
-        "New blog post:",
-        "Meanwhile in a nomad blog:",
-        "Blog post:",
-        "Check out this post:"
-      );
-    }
-
-    return _.sample(possibleOpening);
+  if (item.sourceType === 'blog') {
+    possibleOpening.push(
+      "New blog post:",
+      "Meanwhile in a nomad blog:",
+      "Blog post:",
+      "Check out this post:"
+    );
   }
 
-  _getFlightNumber() {
-    var flightNumber = Flights.findOne(this.item.flightId).number;
+  return _.sample(possibleOpening);
+};
 
-    return _.sample([
-      `on flight #${flightNumber}`,
-      `is on flight #${flightNumber}`,
-      `✈✈${flightNumber}`
-    ]);
+getFlightNumber = function (item) {
+  var flightNumber = Flights.findOne(item.flightId).number;
+
+  return _.sample([
+    `on flight #${flightNumber}`,
+    `is on flight #${flightNumber}`,
+    `✈✈${flightNumber}`
+  ]);
+};
+
+getUrl = function (item) {
+  return Utils.buildShortUrl(item);
+};
+
+getDescription = function (item) {
+  var possibleDescriptions = [
+    "is new.",
+    "Read it at:"
+  ];
+
+  if (item.sourceName === 'Reddit') {
+    possibleDescriptions.push(
+      "is on Reddit.",
+      "is new on Reddit",
+      "was posted on Reddit"
+    );
   }
 
-  _getUrl() {
-    return Utils.buildShortUrl(this.item);
+  if (item.sourceName === 'NomadForum') {
+    possibleDescriptions.push(
+      "is on nomadforum.",
+      "was posted on nomadforum.",
+      "on nomadforum:",
+      "Read at nomadforum:"
+    );
   }
 
-  _getDescription() {
-    var possibleDescriptions = [
-      "is new.",
-      "Read it at:"
-    ];
-
-    if (this.item.sourceName === 'Reddit') {
-      possibleDescriptions.push(
-        "is on Reddit.",
-        "is new on Reddit",
-        "was posted on Reddit"
-      );
-    }
-
-    if (this.item.sourceName === 'NomadForum') {
-      possibleDescriptions.push(
-        "is on nomadforum.",
-        "was posted on nomadforum.",
-        "on nomadforum:",
-        "Read at nomadforum:"
-      );
-    }
-
-    if (this.item.sourceType === 'blog') {
-      possibleDescriptions.push(
-        "is a new blog post.",
-        "New blog post.",
-        "Maybe worth reading?",
-        "Check out the blog post:"
-      );
-    }
-
-    return _.sample(possibleDescriptions);
+  if (item.sourceType === 'blog') {
+    possibleDescriptions.push(
+      "is a new blog post.",
+      "New blog post.",
+      "Maybe worth reading?",
+      "Check out the blog post:",
+      "Blog post:"
+    );
   }
+
+  return _.sample(possibleDescriptions);
 };
