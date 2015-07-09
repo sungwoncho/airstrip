@@ -68,7 +68,8 @@ var handleFeed = function (rawContent, feed) {
         sourceName: feed.sourceName,
         sourceUrl: feed.sourceUrl,
         sourceType: feed.sourceType,
-        author: item.author
+        author: item.author,
+        publishedDate: item.pubdate
       };
 
       Meteor.call('createItem', newItem, today);
