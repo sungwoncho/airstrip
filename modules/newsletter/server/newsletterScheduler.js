@@ -1,7 +1,7 @@
 newsletterScheduler = {
   schedule: function (campaign) {
     var mailchimpCampaign = this.createCampaign(campaign);
-    var scheduledTime = moment().utcOffset(0).add(1, 'hours').format('YYYY-MM-DD HH:mm:ss');
+    var scheduledTime = moment().utc().add(1, 'hours').format('YYYY-MM-DD HH:mm:ss');
 
     var scheduleOptions = {
       cid: mailchimpCampaign.id,

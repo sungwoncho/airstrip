@@ -1,7 +1,7 @@
 var FeedParser = Meteor.npmRequire('feedparser');
 var Readable = Meteor.npmRequire('stream').Readable;
 
-var today = moment().utcOffset(0).format('YYYYMMDD');
+var today = moment().utc().format('YYYYMMDD');
 var itemLimitPerFlight = 10;
 
 ItemFetcher = {
@@ -13,10 +13,17 @@ ItemFetcher = {
       console.log('flight created successfully.');
     }
 
-    Feeds.find({}, {sort: {position: 1}}).forEach(function (feed) {
+    var feeds = Feeds.find({}, {sort: {position: 1}}).fetch();
+    for (var feed of feeds) {
+      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
+        console.log(`Item limit per flight of ${itemLimitPerFlight} reached.`);
+        break;
+      }
+
+      console.log(`Fetching from ${feed.sourceName}...`);
       var RawRSS = HTTP.get(feed.url).content;
       handleFeed(RawRSS, feed);
-    });
+    }
 
     var latestFlight = Flights.findOne({}, {sort: {number: -1}, limit: 1});
     Tweet.postForFlight(latestFlight);
@@ -46,13 +53,13 @@ var handleFeed = function (rawContent, feed) {
         flight = Flights.findOne({date: today});
 
     while (item = stream.read()) {
-      if (Items.find({flightId: flight._id, sourceName: feed.sourceName}).count() >= feed.dailyItemLimit) {
-        console.log('daily item limit reached for ' + feed.sourceName);
+      if (item.pubdate && Date.parse(item.pubdate) < moment().utc().subtract(7, 'days')) {
+        console.log(`Rejecting item that is too old: \"${item.title}\" from ${feed.sourceName}`);
         return;
       }
 
-      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
-        console.log('item limit reached.');
+      if (Items.find({flightId: flight._id, sourceName: feed.sourceName}).count() >= feed.dailyItemLimit) {
+        console.log(`Daily item limit reached for ${feed.sourceName}`);
         return;
       }
 
@@ -64,7 +71,7 @@ var handleFeed = function (rawContent, feed) {
         sourceUrl: feed.sourceUrl,
         sourceType: feed.sourceType,
         author: item.author,
-        createdAt: new Date()
+        publishedDate: item.pubdate
       };
 
       Meteor.call('createItem', newItem, today);
