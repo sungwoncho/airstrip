@@ -11,9 +11,8 @@ Tweet = {
     }));
   },
 
-  postForItem: function (item) {
-    var flightNumber = Flights.findOne(item.flightId).number;
-    var tweetMessage = itemTweetFactory.build(item);
+  postForItem: function (item, type = 'regular') {
+    var tweetMessage = itemTweetFactory.build(item, type);
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
       if (err) console.log(err);

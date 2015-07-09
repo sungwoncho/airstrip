@@ -46,14 +46,21 @@ MochaWeb.testOnly(function(){
   });
 
   describe("itemTweetFactory", function(){
-    describe("build", function(){
+    describe("build regular", function(){
       it("returns a string", function(){
         var flight = Factory.create('flight');
         var item = Factory.build('item', {flightId: flight._id});
 
         expect(itemTweetFactory.build(item)).to.be.a('string');
+      });
+    });
 
-        console.log(itemTweetFactory.build(item));
+    describe("build trending", function(){
+      it("returns a string", function(){
+        var flight = Factory.create('flight');
+        var item = Factory.build('item', {flightId: flight._id});
+
+        expect(itemTweetFactory.build(item, 'trending')).to.be.a('string');
       });
     });
   });

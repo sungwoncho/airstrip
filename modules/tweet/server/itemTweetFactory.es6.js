@@ -1,7 +1,7 @@
 itemTweetFactory = {
-  build: function (item) {
+  build: function (item, type = 'regular') {
     var trim = 0,
-        status = getStatus(item, trim);
+        status = getStatus(item, type, trim);
 
     while (status.length > 140) {
       trim++;
@@ -12,22 +12,26 @@ itemTweetFactory = {
   }
 };
 
-getStatus = function (item, trim = 0) {
-  return _.sample([
-    `${getOpening(item)} ${getTitle(item, trim)} ${getFlightNumber(item)} ${getUrl(item)}`,
-    `${getTitle(item, trim)} ${getDescription(item)} ${getUrl(item)}`
-  ]);
+var getStatus = function (item, type = 'regular', trim = 0) {
+  if (type === 'regular') {
+    return _.sample([
+      `${getOpening(item)} ${getTitle(item, trim)} ${getFlightNumber(item)} ${getUrl(item)}`,
+      `${getTitle(item, trim)} ${getDescription(item)} ${getUrl(item)}`
+    ]);
+  } else if (type === 'trending') {
+    var Indicator = _.sample(["🔥", "🌟", "💫", "🌠"]);
+    return `${Indicator} Trending ${Indicator} ${getTitle(item, trim)} ${getTrendingDescription(item)} ${getUrl(item)}`;
+  }
 };
 
-
-getTitle = function (item, trim = 0) {
+var getTitle = function (item, trim = 0) {
   var title = item.title;
   var trimmedTitle = title.slice(0, title.length - trim);
 
   return `"${trimmedTitle}"`;
 };
 
-getOpening = function (item) {
+var getOpening = function (item) {
   var possibleOpening = [
     "Check out:",
     "Have you read this?",
@@ -68,7 +72,7 @@ getOpening = function (item) {
   return _.sample(possibleOpening);
 };
 
-getFlightNumber = function (item) {
+var getFlightNumber = function (item) {
   var flightNumber = Flights.findOne(item.flightId).number;
 
   return _.sample([
@@ -78,11 +82,11 @@ getFlightNumber = function (item) {
   ]);
 };
 
-getUrl = function (item) {
+var getUrl = function (item) {
   return Utils.buildShortUrl(item);
 };
 
-getDescription = function (item) {
+var getDescription = function (item) {
   var possibleDescriptions = [
     "is new.",
     "Read it at:"
@@ -114,6 +118,14 @@ getDescription = function (item) {
       "Blog post:"
     );
   }
+
+  return _.sample(possibleDescriptions);
+};
+
+var getTrendingDescription = function (item) {
+  var possibleDescriptions = [
+    "Most viewed (last 24 hrs)."
+  ];
 
   return _.sample(possibleDescriptions);
 };
