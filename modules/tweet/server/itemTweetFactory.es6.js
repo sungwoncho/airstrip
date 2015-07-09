@@ -5,7 +5,7 @@ itemTweetFactory = {
 
     while (status.length > 140) {
       trim++;
-      status = getStatus(item, trim);
+      status = getStatus(item, type, trim);
     }
 
     return status;
