@@ -1,7 +1,7 @@
 var FeedParser = Meteor.npmRequire('feedparser');
 var Readable = Meteor.npmRequire('stream').Readable;
 
-var today = moment().utcOffset(0).format('YYYYMMDD');
+var today = moment().utc().format('YYYYMMDD');
 var itemLimitPerFlight = 10;
 
 ItemFetcher = {
@@ -46,7 +46,7 @@ var handleFeed = function (rawContent, feed) {
         flight = Flights.findOne({date: today});
 
     while (item = stream.read()) {
-      if (item.pubdate && Date.parse(item.pubdate) < moment().utcOffset(0).subtract(7, 'days')) {
+      if (item.pubdate && Date.parse(item.pubdate) < moment().utc().subtract(7, 'days')) {
         console.log(`Rejecting item that is too old: \"${item.title}\" from ${feed.sourceName}`);
         return;
       }
