@@ -13,10 +13,17 @@ ItemFetcher = {
       console.log('flight created successfully.');
     }
 
-    Feeds.find({}, {sort: {position: 1}}).forEach(function (feed) {
+    var feeds = Feeds.find({}, {sort: {position: 1}}).fetch();
+    for (var feed of feeds) {
+      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
+        console.log(`Item limit per flight of ${itemLimitPerFlight} reached.`);
+        break;
+      }
+
+      console.log(`Fetching from ${feed.sourceName}...`);
       var RawRSS = HTTP.get(feed.url).content;
       handleFeed(RawRSS, feed);
-    });
+    }
 
     var latestFlight = Flights.findOne({}, {sort: {number: -1}, limit: 1});
     Tweet.postForFlight(latestFlight);
@@ -53,11 +60,6 @@ var handleFeed = function (rawContent, feed) {
 
       if (Items.find({flightId: flight._id, sourceName: feed.sourceName}).count() >= feed.dailyItemLimit) {
         console.log(`Daily item limit reached for ${feed.sourceName}`);
-        return;
-      }
-
-      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
-        console.log(`Item limit per flight of ${itemLimitPerFlight} reached.`);
         return;
       }
 
