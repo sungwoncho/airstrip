@@ -20,6 +20,21 @@ Router.route('/f/:date', {
       Meteor.subscribe('recent-flights', {limit: 4}),
       Meteor.subscribe('flight', this.params.date)
     ];
+  },
+  onAfterAction: function () {
+    if (this.ready()) {
+      var flight = this.data();
+      var date = Utils.dateStringToDate(flight.date);
+      var displayDate = moment(date).format('MMM DD YYYY');
+      var sourceCount = Utils.getSourceList(flight).length;
+
+      SEO.set({
+        title: `airstrip.io - Nomad flight #${flight.number} on ${displayDate}`,
+        meta: {
+          'description': `This flight features ${flight.itemIds.length} digital nomad stories from ${sourceCount} sources.`
+        }
+      });
+    }
   }
 });
 
