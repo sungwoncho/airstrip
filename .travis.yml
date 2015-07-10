@@ -11,5 +11,4 @@ before_install:
 services: mongodb
 
 script:
-  - "meteor --test --release velocity:METEOR@1.1.0.2_2"
-  - "meteor --test --release velocity:METEOR@1.1.0.2_2"
+  - "meteor --test --release velocity:METEOR@1.1.0.2_3"
