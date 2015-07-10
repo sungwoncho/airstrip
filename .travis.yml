@@ -2,8 +2,6 @@ sudo: required
 language: node_js
 node_js:
   - "0.12"
-# env:
-  # METEOR_SETTINGS={"twitterConsumerSecret": "someRandomString1", "twitterAccessTokenSecret": "someRandomString2", "mailchimpAPIKey": "someRandomString3", "mailchimpListId": "someRandomString4"}
 
 before_install:
   - "curl https://install.meteor.com/ | sh"
@@ -11,4 +9,4 @@ before_install:
 services: mongodb
 
 script:
-  - "meteor --test --settings dev-settings.json"
+  - "meteor --test --settings dev-settings.json --release velocity:METEOR@1.1.0.2_3"
