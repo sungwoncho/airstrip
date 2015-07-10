@@ -6,7 +6,7 @@ node_js:
   # METEOR_SETTINGS={"twitterConsumerSecret": "someRandomString1", "twitterAccessTokenSecret": "someRandomString2", "mailchimpAPIKey": "someRandomString3", "mailchimpListId": "someRandomString4"}
 
 before_install:
-  - "curl -L http://git.io/ejPSng | /bin/sh"
+  - "curl https://install.meteor.com/ | sh"
 
 services: mongodb
 
