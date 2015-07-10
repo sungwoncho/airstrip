@@ -35,6 +35,8 @@ Meteor.publish('feeds', function () {
   var user = Meteor.users.findOne(this.userId);
   if (user.isAdmin) {
     return Feeds.find();
+  } else {
+    return Feeds.find({_id: 'a'}); // Return something if use is not admin. (PhantomJS bug) TODO: Remove
   }
 });
 
@@ -42,6 +44,8 @@ Meteor.publish('feed', function (id) {
   var user = Meteor.users.findOne(this.userId);
   if (user.isAdmin) {
     return Feeds.find(id);
+  } else {
+    return Feeds.find({_id: 'a'}); // Return something if use is not admin. (PhantomJS bug) TODO: Remove
   }
 });
 
