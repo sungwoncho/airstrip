@@ -4,7 +4,7 @@ node_js:
 - '0.12'
 before_install:
 - curl https://install.meteor.com/ | sh
-- npm install -g mup
+- npm install -g mupx
 
 # Decrypt mup.json, settings.json, and digital_ocean pem,
 - openssl aes-256-cbc -K $encrypted_b30ee50bb6d2_key -iv $encrypted_b30ee50bb6d2_iv
