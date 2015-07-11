@@ -3,13 +3,11 @@
 
 #!/bin/bash
 
-current_branch=$(git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
+echo "On branch '$TRAVIS_BRANCH'."
 
-echo "On '$current_branch'"
-
-if [ "$current_branch" == "prod" ]; then
+if [ "$TRAVIS_BRANCH" == "prod" ]; then
   echo "Triggering MupX deployment..."
   mupx deploy
 else
-  echo "Not deploying unless on 'prod' branch"
+  echo "Use 'prod' branch if you want to deploy."
 fi
