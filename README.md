@@ -2,6 +2,10 @@
 
 Where nomad stories land daily.
 
+## Build status
+
+**production** [![Build Status](https://magnum.travis-ci.com/sungwoncho/airstrip.svg?token=hGE2stF83pPqiLgUqVjc&branch=prod)](https://magnum.travis-ci.com/sungwoncho/airstrip)
+
 
 ## Continuous Deployment
 
