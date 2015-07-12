@@ -70,6 +70,7 @@ msavin:mongol@1.0.98
 npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 observe-sequence@1.0.6
+ongoworks:spiderable@1.0.7
 ordered-dict@1.0.3
 package-version-parser@3.0.3
 percolate:migrations@0.7.5
@@ -93,7 +94,6 @@ sha@1.0.3
 spacebars@1.0.6
 spacebars-compiler@1.0.6
 spacejamio:chai@1.9.2_3
-spiderable@1.0.7
 srp@1.0.3
 templating@1.1.1
 tracker@1.0.7
