@@ -8,6 +8,7 @@ ItemFetcher = {
   fetch: function () {
     // Create a flight if no flight exists for today
     console.log('creating a flight for ' + today + '...');
+    console.log('today is actually ' + moment().utc().format('YYYYMMDD'));
     if (Flights.find({date: today}).count() === 0) {
       Meteor.call('createFlight', {date: today, itemIds: []});
       console.log('flight created successfully.');
