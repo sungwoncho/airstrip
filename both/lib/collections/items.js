@@ -65,7 +65,7 @@ Factory.define('item', Items, {
   sourceUrl: 'http://www.example.com',
   sourceType: 'blog',
   authorName: 'jon',
-  authorTwitter: '@jonjonjon',
+  authorTwitter: 'jonjonjon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',
   shortLink: Math.random().toString(36).substring(12),

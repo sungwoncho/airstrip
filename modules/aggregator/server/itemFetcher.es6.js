@@ -86,10 +86,15 @@ var handleFeed = function (rawContent, feed) {
 var findAuthorTwitter = function (feed, authorName) {
   if (!!!feed.authors) return;
 
+  // If only one author, return his/her Twitter
+  if (feed.authors.length === 1) {
+    return feed.authors[0].twitter;
+  }
+
+  // If more than one author, filter by name
   var author = feed.authors.filter(function (author) {
     return author.name === authorName;
   });
-
   return author[0].twitter;
 };
 
