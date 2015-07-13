@@ -15,12 +15,18 @@ itemTweetFactory = {
 var getStatus = function (item, type = 'regular', trim = 0) {
   if (type === 'regular') {
     return _.sample([
-      `${getOpening(item)} ${getTitle(item, trim)} ${getFlightNumber(item)} ${getUrl(item)}`,
-      `${getTitle(item, trim)} ${getDescription(item)} ${getUrl(item)}`
+      `${getOpening(item)} ${getTitle(item, trim)}${getAuthorTwitter(item)} ${getFlightNumber(item)} ${getUrl(item)}`,
+      `${getTitle(item, trim)}${getAuthorTwitter(item)} ${getDescription(item)} ${getUrl(item)}`
     ]);
   } else if (type === 'trending') {
     var Indicator = _.sample(["🔥", "🌟", "💫", "🌠"]);
-    return `${Indicator} Trending ${Indicator} ${getTitle(item, trim)} ${getTrendingDescription(item)} ${getUrl(item)}`;
+    return `${Indicator} Trending ${Indicator} ${getTitle(item, trim)}${getAuthorTwitter(item)} ${getTrendingDescription(item)} ${getUrl(item)}`;
+  }
+};
+
+var getAuthorTwitter = function (item) {
+  if (!!item.authorTwitter) {
+    return ` by @${item.authorTwitter}`;
   }
 };
 
@@ -34,10 +40,8 @@ var getTitle = function (item, trim = 0) {
 var getOpening = function (item) {
   var possibleOpening = [
     "Check out:",
-    "Have you read this?",
-    "Recent item:",
+    "Recent:",
     "New:",
-    "Dear paseengers:"
   ];
 
   if (item.sourceName === 'Reddit') {
