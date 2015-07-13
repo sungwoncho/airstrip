@@ -16,7 +16,7 @@ Template.item.helpers({
       var rawDate = Date.parse(this.publishedDate);
       var formattedDate = moment(rawDate).format('MMMM DD');
 
-      return `on ${formattedDate}`;
+      return formattedDate;
     }
   }
 });

@@ -22,6 +22,12 @@ var FeedSchema = new SimpleSchema({
     allowedValues: ['blog', 'podcast', 'forum', 'news'],
     optional: true,
   },
+  "authors.$.name": {
+    type: String
+  },
+  "authors.$.twitter": {
+    type: String
+  },
   description: {
     type: String,
     optional: true

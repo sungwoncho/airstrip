@@ -20,7 +20,11 @@ var ItemSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  author: {
+  authorName: {
+    type: String,
+    optional: true
+  },
+  authorTwitter: {
     type: String,
     optional: true
   },
@@ -60,7 +64,8 @@ Factory.define('item', Items, {
   sourceName: 'Example',
   sourceUrl: 'http://www.example.com',
   sourceType: 'blog',
-  author: 'jon',
+  authorName: 'jon',
+  authorTwitter: '@jonjonjon',
   publishedDate: new Date(2015, 6, 28),
   flightId: 'a1',
   shortLink: Math.random().toString(36).substring(12),

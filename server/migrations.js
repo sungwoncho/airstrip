@@ -62,4 +62,19 @@ Migrations.add({
   }
 });
 
+Migrations.add({
+  version: 6,
+  name: "Move author to authorName",
+  up: function () {
+    Items.find({author: {$exists: true}}).forEach(function (item) {
+      Items.update(item._id, {$set: {authorName: item.author}, $unset: {author: ''}}, {multi: true, validate: false});
+    });
+  },
+  down: function () {
+    Items.find({authorName: {$exists: true}}).forEach(function (item) {
+      Items.update(item._id, {$set: {author: item.authorName}, $unset: {authorName: ''}}, {multi: true, validate: false});
+    });
+  }
+});
+
 Migrations.migrateTo('latest');

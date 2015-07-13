@@ -12,14 +12,18 @@
       </h2>
 
       <ul class="secondary-info">
-        {{#if author}}
+        {{#if authorName}}
           <li>
-            By {{author}}
+            {{# if authorTwitter}}
+              <a href="https://twitter.com/{{authorTwitter}}" target="_blank">@{{authorName}}</a>
+            {{else}}
+              {{authorName}}
+            {{/if}}
           </li>
         {{/if}}
 
         <li>
-          <a href="{{sourceUrl}}">{{sourceName}}</a>
+          on <a href="{{sourceUrl}}">{{sourceName}}</a>
         </li>
 
         <li>

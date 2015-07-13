@@ -71,7 +71,8 @@ var handleFeed = function (rawContent, feed) {
         sourceName: feed.sourceName,
         sourceUrl: feed.sourceUrl,
         sourceType: feed.sourceType,
-        author: item.author,
+        authorName: item.author,
+        authorTwitter: findAuthorTwitter(feed, item.author),
         publishedDate: item.pubdate
       };
 
@@ -80,6 +81,16 @@ var handleFeed = function (rawContent, feed) {
   }, function (error) {
     console.log('Error occurred: ' + error);
   }, feedParser));
+};
+
+var findAuthorTwitter = function (feed, authorName) {
+  if (!!!feed.authors) return;
+
+  var author = feed.authors.filter(function (author) {
+    return author.name === authorName;
+  });
+
+  return author[0].twitter;
 };
 
 // a convenience method to trigger and test fetch in browser console
