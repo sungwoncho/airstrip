@@ -6,7 +6,7 @@ Meteor.startup(function () {
     },
     og: {
       'type': 'website',
-      'image': 'https://airstrip.io/images/logo.png',
+      'image': 'https://airstrip.io/images/og-logo.png',
       'site_name': 'airstrip.io'
     },
     twitter:  {
