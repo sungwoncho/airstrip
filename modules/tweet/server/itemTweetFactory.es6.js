@@ -27,6 +27,8 @@ var getStatus = function (item, type = 'regular', trim = 0) {
 var getAuthorTwitter = function (item) {
   if (!!item.authorTwitter) {
     return ` by @${item.authorTwitter}`;
+  } else {
+    return null;
   }
 };
 
