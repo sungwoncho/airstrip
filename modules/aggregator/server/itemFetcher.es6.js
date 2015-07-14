@@ -1,22 +1,25 @@
 var FeedParser = Meteor.npmRequire('feedparser');
 var Readable = Meteor.npmRequire('stream').Readable;
 
-var today = moment().utc().format('YYYYMMDD');
+var today = function () {
+  return moment().utc().format('YYYYMMDD');
+};
+
 var itemLimitPerFlight = 10;
 
 ItemFetcher = {
   fetch: function () {
     // Create a flight if no flight exists for today
-    console.log('creating a flight for ' + today + '...');
+    console.log('creating a flight for ' + today() + '...');
     console.log('today is actually ' + moment().utc().format('YYYYMMDD'));
-    if (Flights.find({date: today}).count() === 0) {
-      Meteor.call('createFlight', {date: today, itemIds: []});
+    if (Flights.find({date: today()}).count() === 0) {
+      Meteor.call('createFlight', {date: today(), itemIds: []});
       console.log('flight created successfully.');
     }
 
     var feeds = Feeds.find({}, {sort: {position: 1}}).fetch();
     for (var feed of feeds) {
-      if (Flights.findOne({date: today}).itemIds.length >= itemLimitPerFlight) {
+      if (Flights.findOne({date: today()}).itemIds.length >= itemLimitPerFlight) {
         console.log(`Item limit per flight of ${itemLimitPerFlight} reached.`);
         break;
       }
@@ -51,7 +54,7 @@ var handleFeed = function (rawContent, feed) {
 
   feedParser.on('readable', Meteor.bindEnvironment(function () {
     var stream = this,
-        flight = Flights.findOne({date: today});
+        flight = Flights.findOne({date: today()});
 
     while (item = stream.read()) {
       if (item.pubdate && Date.parse(item.pubdate) < moment().utc().subtract(7, 'days')) {
@@ -76,7 +79,7 @@ var handleFeed = function (rawContent, feed) {
         publishedDate: item.pubdate
       };
 
-      Meteor.call('createItem', newItem, today);
+      Meteor.call('createItem', newItem, today());
     }
   }, function (error) {
     console.log('Error occurred: ' + error);
