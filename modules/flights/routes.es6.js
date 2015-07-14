@@ -25,7 +25,7 @@ Router.route('/f/:date', {
     if (this.ready()) {
       var flight = this.data();
       var date = Utils.dateStringToDate(flight.date);
-      var displayDate = moment(date).format('MMM DD YYYY');
+      var displayDate = moment(date).add(1,'month').format('MMM DD YYYY');
       var sourceCount = Utils.getSourceList(flight).length;
 
       SEO.set({
