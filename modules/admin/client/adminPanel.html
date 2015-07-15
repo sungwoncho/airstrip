@@ -1,4 +1,8 @@
 <template name="adminPanel">
+  <h1>Server facts</h1>
+  {{> serverFacts}}
+
+  <h1>Flights</h1>
   {{#each flights}}
     <a href="{{pathFor route='adminFlight.show'}}">{{date}}</a>
   {{/each}}
