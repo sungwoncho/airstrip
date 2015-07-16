@@ -2,6 +2,8 @@
   <h1>Server facts</h1>
   {{> serverFacts}}
 
+  <a href="#" class="manual-fetch-btn">Manually fetch items</a>
+
   <h1>Flights</h1>
   {{#each flights}}
     <a href="{{pathFor route='adminFlight.show'}}">{{date}}</a>

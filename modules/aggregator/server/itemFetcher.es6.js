@@ -104,6 +104,7 @@ var findAuthorTwitter = function (feed, authorName) {
 // a convenience method to trigger and test fetch in browser console
 Meteor.methods({
   allWeNeedIsFetch: function () {
+    if (!Meteor.user().isAdmin) return;
     ItemFetcher.fetch();
   }
 });
