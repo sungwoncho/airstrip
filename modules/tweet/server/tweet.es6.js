@@ -12,6 +12,9 @@ Tweet = {
   },
 
   postForItem: function (item, type = 'regular') {
+    if (!item)
+      throw new Error('item must be present.');
+
     var tweetMessage = itemTweetFactory.build(item, type);
 
     this.twitterAPI.post('statuses/update', {status: tweetMessage}, Meteor.bindEnvironment(function (err, data, response) {
