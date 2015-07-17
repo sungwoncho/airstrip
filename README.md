@@ -1,8 +1,8 @@
-# airstrip.io
+# airstrip
 
-Where nomad stories land daily.
+Where nomad stories land daily
 
-Author's blog article: [Making airstrip.io](https://sungwoncho.io/making-airstrip-io/)
+[airstrip.io](https://airstrip.io)
 
 ## Build status
 
@@ -29,9 +29,14 @@ Work on your feature branch and merge them to `master` before pushing to `prod`.
 
 ## Contributing
 
-Issues and pull requests are welcome. Let's make this better.
+You may open an issue with suggestions and feedback. See [airstrip roadmap](https://trello.com/b/XLaDBggV/airstrip-roadmap) for planned features.
 
-Please see [airstrip roadmap](https://trello.com/b/XLaDBggV/airstrip-roadmap) for more information.
+Please respect our [code of conduct](https://github.com/sungwoncho/airstrip/blob/master/CODE_OF_CONDUCT.md)
+
+
+## References
+
+[Making airstrip.io](https://sungwoncho.io/making-airstrip-io/)
 
 
 ## Lisence
