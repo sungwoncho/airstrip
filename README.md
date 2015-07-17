@@ -6,13 +6,9 @@ Where nomad stories land daily
 
 ## Build status
 
-* `prod`
-
-[![Build Status](https://magnum.travis-ci.com/sungwoncho/airstrip.svg?token=hGE2stF83pPqiLgUqVjc&branch=prod)](https://magnum.travis-ci.com/sungwoncho/airstrip)
-
-* `master`
-
-[![Build Status](https://magnum.travis-ci.com/sungwoncho/airstrip.svg?token=hGE2stF83pPqiLgUqVjc&branch=master)](https://magnum.travis-ci.com/sungwoncho/airstrip)
+`prod`    | `matser`   |
+--------|----------|
+[![Build Status](https://magnum.travis-ci.com/sungwoncho/airstrip.svg?token=hGE2stF83pPqiLgUqVjc&branch=prod)](https://magnum.travis-ci.com/sungwoncho/airstrip) | [![Build Status](https://magnum.travis-ci.com/sungwoncho/airstrip.svg?token=hGE2stF83pPqiLgUqVjc&branch=master)](https://magnum.travis-ci.com/sungwoncho/airstrip)
 
 
 ## Continuous Deployment
