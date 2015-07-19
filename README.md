@@ -37,4 +37,4 @@ Please respect our [code of conduct](https://github.com/sungwoncho/airstrip/blob
 
 ## Lisence
 
-airstrip is a free software released under the term specified in [LICENSE](https://github.com/sungwoncho/airstrip/blob/master/LISENCE) file.
+airstrip is a free software released under the term specified in [LICENSE](https://github.com/sungwoncho/airstrip/blob/master/LICENSE) file.
