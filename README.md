@@ -2,7 +2,7 @@
 
 Where nomad stories land daily
 
-[airstrip.io](https://airstrip.io)
+**No longer active**
 
 ## Build status
 
