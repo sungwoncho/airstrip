@@ -1,6 +1,6 @@
 # airstrip
 
-Where nomad stories land daily
+Where superman stories land daily
 
 **No longer active**
 
